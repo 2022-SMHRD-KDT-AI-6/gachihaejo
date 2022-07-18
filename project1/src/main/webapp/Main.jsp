@@ -168,9 +168,10 @@ input{
 <body>
 
 <%
-	MemberDAO dao = new MemberDAO();
-	MemberDTO user = dao.select("user_id");
-	// MemberDTO dto = (MemberDTO)session.getAttribute("user_id"); -> 합치고 나서 사용
+	// MemberDAO dao = new MemberDAO();
+	// MemberDTO user = dao.select("user_id");
+	MemberDTO dto = (MemberDTO)session.getAttribute("user_id"); 
+	// -> 합치고 나서 사용
 	
 	
 %>
@@ -200,7 +201,7 @@ input{
                 <div class="row" >
                     <div class="col-md-4">
                         <div class="profile-img">
-                            <img src="image/<%= user.getUser_photo() %>" id="preview-image" onerror="this.src='https://item.kakaocdn.net/do/37e6b48e7bd846b1bcd85143382ab6ac9f5287469802eca457586a25a096fd31';">
+                            <img src="image/<%= dto.getUser_photo() %>" id="preview-image" onerror="this.src='https://item.kakaocdn.net/do/37e6b48e7bd846b1bcd85143382ab6ac9f5287469802eca457586a25a096fd31';">
                             <div class="file btn btn-lg btn-primary">
                                 사진 바꾸기
                                 <input type="file" name = "file" id="input-image">
@@ -210,10 +211,10 @@ input{
                     <div class="col-md-6" >
                         <div class="profile-head">
                                     <h5>
-                                        <%= user.getUser_name() %>
+                                        <%= dto.getUser_name() %>
                                     </h5>
                                     <h6>
-                                        <%= user.getUser_nick() %>
+                                        <%= dto.getUser_nick() %>
                                     </h6>
                                     <p class="proile-rating">선호도 : <span>8/10</span></p>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -238,7 +239,7 @@ input{
                                                 <label>아이디</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type = "text" value= <%= user.getUser_id() %> name = "user_id"  readonly>
+                                                <input type = "text" value= <%= dto.getUser_id() %> name = "user_id"  readonly>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -246,7 +247,7 @@ input{
                                                 <label>비밀번호</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type = "password" value= <%= user.getUser_pw() %> name = "user_pw">
+                                                <input type = "password" value= <%= dto.getUser_pw() %> name = "user_pw">
                                             </div>
                                         </div>
                                         <div class="row">
@@ -254,7 +255,7 @@ input{
                                                 <label>이름</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type = "text" value= <%= user.getUser_name() %> name = "user_name" readonly>
+                                                <input type = "text" value= <%= dto.getUser_name() %> name = "user_name" readonly>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -262,7 +263,7 @@ input{
                                                 <label>닉네임</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type = "text" value= <%= user.getUser_nick() %> name = "user_nick" class = "input_nick"><br>
+                                                <input type = "text" value= <%= dto.getUser_nick() %> name = "user_nick" class = "input_nick"><br>
                                                 <font id = "checkNick" size = "2"></font>
                                             </div>
                                         </div>
@@ -271,7 +272,7 @@ input{
                                                 <label>이메일</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type = "text" value= <%= user.getUser_email() %> name = "user_email">
+                                                <input type = "text" value= <%= dto.getUser_email() %> name = "user_email">
                                             </div>
                                         </div>
                                         <div class="row">
@@ -279,7 +280,7 @@ input{
                                                 <label>연락처</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type = "text" value= <%= user.getUser_phone() %> name = "user_phone">
+                                                <input type = "text" value= <%= dto.getUser_phone() %> name = "user_phone">
                                             </div>
                                         </div>
                                         
@@ -288,7 +289,7 @@ input{
                                                 <label>생년월일</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type = "text" value= <%= user.getUser_birthdate() %> name = "user_birthdate" readonly>
+                                                <input type = "text" value= <%= dto.getUser_birthdate() %> name = "user_birthdate" readonly>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -296,7 +297,7 @@ input{
                                                 <label>성별</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type = "text" value= <%= user.getUser_gender() %> name = "user_gender" readonly>
+                                                <input type = "text" value= <%= dto.getUser_gender() %> name = "user_gender" readonly>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -305,7 +306,7 @@ input{
                                             </div>
                                             <div class="col-md-6">
                                                 <!-- <textarea name="content" rows="5" style="resize: none;" placeholder=<%= user.getUser_profile() %>></textarea> -->
-                                                <input type = "text" value= <%= user.getUser_profile() %> name = "user_profile">
+                                                <input type = "text" value= <%= dto.getUser_profile() %> name = "user_profile">
                                             </div>
                                         </div>
                             </div>
