@@ -239,7 +239,7 @@ input{
                                                 <label>아이디</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type = "text" value= <%= dto.getId() %> name = "user_id"  readonly>
+                                                <input type = "text" value= <%= dto.getId() %> name = "id"  readonly>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -247,7 +247,7 @@ input{
                                                 <label>비밀번호</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type = "password" value= <%= dto.getPw() %> name = "user_pw">
+                                                <input type = "password" value= <%= dto.getPw() %> name = "pw">
                                             </div>
                                         </div>
                                         <div class="row">
@@ -255,7 +255,7 @@ input{
                                                 <label>이름</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type = "text" value= <%= dto.getName() %> name = "user_name" readonly>
+                                                <input type = "text" value= <%= dto.getName() %> name = "name" readonly>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -263,7 +263,7 @@ input{
                                                 <label>닉네임</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type = "text" value= <%= dto.getNick() %> name = "user_nick" class = "input_nick"><br>
+                                                <input type = "text" value= <%= dto.getNick() %> name = "nick" class = "input_nick"><br>
                                                 <font id = "checkNick" size = "2"></font>
                                             </div>
                                         </div>
@@ -272,7 +272,7 @@ input{
                                                 <label>이메일</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type = "text" value= <%= dto.getEmail() %> name = "user_email">
+                                                <input type = "text" value= <%= dto.getEmail() %> name = "email">
                                             </div>
                                         </div>
                                         <div class="row">
@@ -280,7 +280,7 @@ input{
                                                 <label>연락처</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type = "text" value= <%= dto.getPhone() %> name = "user_phone">
+                                                <input type = "text" value= <%= dto.getPhone() %> name = "phone">
                                             </div>
                                         </div>
                                         
@@ -289,7 +289,7 @@ input{
                                                 <label>생년월일</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type = "text" value= <%= dto.getBirth() %> name = "user_birthdate" readonly>
+                                                <input type = "text" value= <%= dto.getBirth() %> name = "birth" readonly>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -297,7 +297,7 @@ input{
                                                 <label>성별</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type = "text" value= <%= dto.getGender() %> name = "user_gender" readonly>
+                                                <input type = "text" value= <%= dto.getGender() %> name = "gender" readonly>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -305,8 +305,8 @@ input{
                                                 <label>자기소개</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <!-- <textarea name="content" rows="5" style="resize: none;" placeholder=<%= dto.getUser_profile() %>></textarea> -->
-                                                <input type = "text" value= <%= dto.getProfile() %> name = "user_profile">
+                                                <!-- <textarea name="content" rows="5" style="resize: none;" placeholder=<!--%= dto.getProfile() %--!> %>() %>></textarea> -->
+                                                <input type = "text" value= <%= dto.getProfile() %> name = "profile">
                                             </div>
                                         </div>
                             </div>
@@ -328,12 +328,12 @@ input{
 
 	$('.input_nick').focusout(function () {
 		
-		var user_nick = $('.input_nick').val();
+		var nick = $('.input_nick').val();
 		
 		$.ajax({
 			url : "NickCheckService",
 			type : "post",
-			data : {user_nick : user_nick},
+			data : {nick : nick},
 			dataType : 'json',
 			
 			success : function (result) {

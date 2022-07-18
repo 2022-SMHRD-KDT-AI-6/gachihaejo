@@ -50,7 +50,7 @@ public class MemberDAO {
 
 		try {
 
-			String sql = "update tbl_user set pw=?, nick=?, phone=?, email=?, profile=?, photo=? where id=?";
+			String sql = "update tbl_user set user_pw=?, user_nick=?, user_phone=?, user_email=?, user_profile=?, user_photo=? where user_id=?";
 
 			psmt = conn.prepareStatement(sql);
 
@@ -78,7 +78,7 @@ public class MemberDAO {
 		
 		try {
 			
-			String sql = "select * from tbl_user where id = ?";
+			String sql = "select * from tbl_user where user_id = ?";
 			
 			psmt = conn.prepareStatement(sql);
 			
@@ -92,14 +92,14 @@ public class MemberDAO {
 				String name = rs.getString("name");
 				String pw = rs.getString("pw");
 				String nick = rs.getString("nick");
-				String birthdate = rs.getString("birthdate");
+				String birth = rs.getString("birth");
 				String gender = rs.getString("gender");
 				String phone = rs.getString("phone");
 				String email = rs.getString("email");
 				String profile = rs.getString("profile");
 				String photo = rs.getString("photo");
 				
-				dto = new LoginDTO(id, pw, name, nick, birthdate, gender, phone, email, profile, photo);
+				dto = new LoginDTO(id, pw, name, nick, birth, gender, phone, email, profile, photo);
 		
 			}
 			
@@ -113,7 +113,7 @@ public class MemberDAO {
 		return dto;
 	}
 	
-	public int checkNick(String user_nick) {
+	public int checkNick(String nick) {
 		
 		db_conn();
 		
@@ -122,13 +122,13 @@ public class MemberDAO {
 		try {
 			psmt = conn.prepareStatement(sql);
 			
-			psmt.setString(1, user_nick);
+			psmt.setString(1, nick);
 			
 			rs = psmt.executeQuery();
 			
 			
 	
-			if(rs.next() || user_nick.equals("")) {
+			if(rs.next() || nick.equals("")) {
 				nickCheck = 0; // 이미 존재하는 경우, 생성 불가능
 			}else {
 				nickCheck = 1; // 존재하지 않는 경우, 생성 가능
