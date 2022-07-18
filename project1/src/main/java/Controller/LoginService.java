@@ -62,7 +62,7 @@ public class LoginService extends HttpServlet {
 		}
 		System.out.println("끝");
 		
-		//response.sendRedirect("Main.jsp");
+		response.sendRedirect("Main.jsp");
 		
 		
 		
