@@ -170,8 +170,13 @@ input{
 <%
 	// MemberDAO dao = new MemberDAO();
 	// MemberDTO user = dao.select("user_id");
-	LoginDTO dto = (LoginDTO)session.getAttribute("id"); 
+	LoginDTO dto = (LoginDTO)session.getAttribute("user"); 
 	// -> 합치고 나서 사용
+	
+	if(dto == null){
+		System.out.println("test");
+		response.sendRedirect("login.jsp");
+	}
 	
 	
 %>
@@ -196,6 +201,7 @@ input{
             </div>
         </header>
 <!-- 프로젝트 -->
+<%if(dto !=null){ %>
 <div class="container emp-profile">
             <form method="post" action="MyPageServlet" enctype="multipart/form-data">
                 <div class="row" >
@@ -305,7 +311,7 @@ input{
                                                 <label>자기소개</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <!-- <textarea name="content" rows="5" style="resize: none;" placeholder=<!--%= dto.getProfile() %--!> %>() %>></textarea> -->
+                                                
                                                 <input type = "text" value= <%= dto.getProfile() %> name = "profile">
                                             </div>
                                         </div>
@@ -320,6 +326,7 @@ input{
         </div>
             </form>           
         </div>
+        <%} %>
         
 </body>
 </html>
