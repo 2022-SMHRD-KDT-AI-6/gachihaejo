@@ -305,7 +305,7 @@ input{
                                                 <label>자기소개</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <!-- <textarea name="content" rows="5" style="resize: none;" placeholder=<%= user.getUser_profile() %>></textarea> -->
+                                                <!-- <textarea name="content" rows="5" style="resize: none;" placeholder=<%= dto.getUser_profile() %>></textarea> -->
                                                 <input type = "text" value= <%= dto.getUser_profile() %> name = "user_profile">
                                             </div>
                                         </div>
