@@ -38,6 +38,16 @@ public class LoginDTO {
 //		this.joindate = joindate;
 	}
 
+	public LoginDTO(String id, String pw, String nick, String phone, String email,
+			String profile, String photo) {
+		this.id = id;
+		this.pw = pw;
+		this.nick = nick;
+		this.phone = phone;
+		this.email = email;
+		this.profile = profile;
+		this.photo = photo;
+	}
 
 
 	public LoginDTO(String id, String pw) {
