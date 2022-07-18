@@ -44,23 +44,23 @@ public class MemberDAO {
 		}
 	}
 
-	public int update(MemberDTO udto) {
+	public int update(LoginDTO udto) {
 
 		db_conn();
 
 		try {
 
-			String sql = "update tbl_user set user_pw=?, user_nick=?, user_phone=?, user_email=?, user_profile=?, user_photo=? where user_id=?";
+			String sql = "update tbl_user set pw=?, nick=?, phone=?, email=?, profile=?, photo=? where id=?";
 
 			psmt = conn.prepareStatement(sql);
 
-			psmt.setString(1, udto.getUser_pw());
-			psmt.setString(2, udto.getUser_nick());
-			psmt.setString(3, udto.getUser_phone());
-			psmt.setString(4, udto.getUser_email());
-			psmt.setString(5, udto.getUser_profile());
-			psmt.setString(6, udto.getUser_photo());
-			psmt.setString(7, udto.getUser_id());
+			psmt.setString(1, udto.getPw());
+			psmt.setString(2, udto.getNick());
+			psmt.setString(3, udto.getPhoto());
+			psmt.setString(4, udto.getEmail());
+			psmt.setString(5, udto.getProfile());
+			psmt.setString(6, udto.getPhoto());
+			psmt.setString(7, udto.getId());
 
 			cnt = psmt.executeUpdate();
 
@@ -72,13 +72,13 @@ public class MemberDAO {
 		return cnt;
 	}
 
-	public MemberDTO select(String user_id) {
-		MemberDTO dto = new MemberDTO();
+	public LoginDTO select(String id) {
+		LoginDTO dto = new LoginDTO();
 		db_conn();
 		
 		try {
 			
-			String sql = "select * from tbl_user where user_id = ?";
+			String sql = "select * from tbl_user where id = ?";
 			
 			psmt = conn.prepareStatement(sql);
 			
@@ -88,19 +88,19 @@ public class MemberDAO {
 			
 			if(rs.next()) {
 				
-				user_id = rs.getString("user_id");
-				String user_name = rs.getString("user_name");
-				String user_pw = rs.getString("user_pw");
-				String user_nick = rs.getString("user_nick");
-				String user_birthdate = rs.getString("user_birthdate");
-				String user_gender = rs.getString("user_gender");
-				String user_phone = rs.getString("user_phone");
-				String user_email = rs.getString("user_email");
-				String user_profile = rs.getString("user_profile");
-				String user_photo = rs.getString("user_photo");
+				id = rs.getString("id");
+				String name = rs.getString("name");
+				String pw = rs.getString("pw");
+				String nick = rs.getString("nick");
+				String birthdate = rs.getString("birthdate");
+				String gender = rs.getString("gender");
+				String phone = rs.getString("phone");
+				String email = rs.getString("email");
+				String profile = rs.getString("profile");
+				String photo = rs.getString("photo");
 				
-				dto = new MemberDTO(user_id, user_pw, user_name, user_nick, user_birthdate, user_gender, user_phone, user_email, user_profile, user_photo);
-				
+				dto = new LoginDTO(id, pw, name, nick, birthdate, gender, phone, email, profile, photo);
+		
 			}
 			
 			
