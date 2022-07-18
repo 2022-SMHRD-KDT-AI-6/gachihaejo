@@ -13,7 +13,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import Model.LoginDTO;
-import Model.MemberDAO;
+import Model.MemberupDAO;
 
 
 
@@ -50,6 +50,9 @@ public class MyPageServlet extends HttpServlet {
 		String phone = multi.getParameter("phone");
 		String email = multi.getParameter("email");
 		String profile = multi.getParameter("profile");
+		String name = multi.getParameter("name");
+		String birth = multi.getParameter("birth");
+		String gender = multi.getParameter("gender");
 		
 		String photo = multi.getFilesystemName("file");
 		System.out.println("전송 받은 파일 : " + photo);
@@ -68,15 +71,15 @@ public class MyPageServlet extends HttpServlet {
 		
 		// 은영이꺼랑 합치면 쓰장
 		HttpSession session = request.getSession();
-		LoginDTO dto = (LoginDTO)session.getAttribute("id");
+		LoginDTO dto = (LoginDTO)session.getAttribute("user");
 //		String user_id = user.getUser_id(); -> 확인
 		String id = dto.getId();
 		
 		System.out.println("아이디 : " + id);
 		
-		LoginDTO udto = new LoginDTO(id, pw, nick, phone, email, profile, photo);
+		LoginDTO udto = new LoginDTO(id, pw, name, nick, birth, gender, email, phone, profile, photo);
 		
-		MemberDAO dao = new MemberDAO();
+		MemberupDAO dao = new MemberupDAO();
 		// -> 합치고 나서 사용!
 		int cnt = dao.update(udto);
 		

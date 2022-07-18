@@ -1,5 +1,5 @@
 <%@page import="Model.LoginDTO"%>
-<%@page import="Model.MemberDAO"%>
+<%@page import="Model.MemberupDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -170,7 +170,8 @@ input{
 <%
 	// MemberDAO dao = new MemberDAO();
 	// MemberDTO user = dao.select("user_id");
-	LoginDTO dto = (LoginDTO)session.getAttribute("user"); 
+	LoginDTO dto = (LoginDTO)session.getAttribute("user");
+	//System.out.println("test");
 	// -> 합치고 나서 사용
 	
 	if(dto == null){
