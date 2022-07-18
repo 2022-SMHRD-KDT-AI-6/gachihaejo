@@ -26,13 +26,6 @@ public class MyPageServlet extends HttpServlet {
 		// 업데이트 함수, 중복 거르는 조건문 만들기
 		request.setCharacterEncoding("UTF-8");
 		
-//		String user_pw = request.getParameter("user_pw");
-//		String user_nick = request.getParameter("user_nick");
-//		String user_phone = request.getParameter("user_phone");
-//		String user_email = request.getParameter("user_email");
-//		String user_profile = request.getParameter("user_profile");
-		// String user_photo = request.getParameter("user_photo");
-		
 		String savePath = request.getServletContext().getRealPath("image");
 		System.out.println(savePath);
 		
@@ -61,8 +54,8 @@ public class MyPageServlet extends HttpServlet {
 		System.out.println("전송 받은 파일 : " + user_photo);
 		
 		// 내가 확인하면서 할 것
-		MemberDAO dao = new MemberDAO();
-		MemberDTO user = dao.select("user_id");
+//		MemberDAO dao = new MemberDAO();
+//		MemberDTO user = dao.select("user_id");
 		
 		System.out.println("비밀번호 : " + user_pw);
 		System.out.println("닉네임 : " + user_nick);
@@ -73,16 +66,17 @@ public class MyPageServlet extends HttpServlet {
 		
 		
 		// 은영이꺼랑 합치면 쓰장
-//		HttpSession session = request.getSession();
-//		MemberDTO dto = (MemberDTO)session.getAttribute("user_id");
-		String user_id = user.getUser_id();
-		// session 쓰면 Sting user id = dto.getUser_id();
+		HttpSession session = request.getSession();
+		MemberDTO dto = (MemberDTO)session.getAttribute("user_id");
+//		String user_id = user.getUser_id(); -> 확인
+		String user_id = dto.getUser_id();
 		
 		System.out.println("아이디 : " + user_id);
 		
 		MemberDTO udto = new MemberDTO(user_id, user_pw, user_nick, user_phone, user_email, user_profile, user_photo);
 		
-		// MemberDTO dto = new MemberDTO(); -> 합치고 나서 사용!
+		MemberDAO dao = new MemberDAO();
+		// -> 합치고 나서 사용!
 		int cnt = dao.update(udto);
 		
 		if(cnt > 0) {
@@ -95,9 +89,10 @@ public class MyPageServlet extends HttpServlet {
 			System.out.println("수정 메일 : " + udto.getUser_email());
 			System.out.println("수정 프로필 : " + udto.getUser_profile());
 			System.out.println("수정 사진 : " + udto.getUser_photo());
+			
 			// 세션에 있는 dto 덮어쓰기
 			// 저장하는 이름이 겹쳤을 경우 -> 덮어쓰기
-			// session.setAttribute("user", udto);
+			session.setAttribute("user", udto);
 		}else {
 			// 실패 : cnt = 0
 			System.out.println("개인정보 수정 실패");
