@@ -191,7 +191,7 @@ input{
 	
 %>
 
-
+<%if(dto !=null){ %>
 <header id="header">
             <div class="h_cont">
                 <ul class="h_random">
@@ -206,13 +206,13 @@ input{
                 </ul>
                 <ul class="h_menu">
                    <!-- <li><a href="login.jsp">login</a></li> --> 
-                    <li><a href="#">__님 안녕하세요</a></li>
+                    <li><%= dto.getNick() %>님 안녕하세요</li>
                     <li><a href="#">logout</a></li>
                 </ul>
             </div>
         </header>
 <!-- 프로젝트 -->
-<%if(dto !=null){ %>
+
 <c:set var="content" scope="session" value="<%= dto.getProfile()%>"/>
 <div class="container emp-profile">
             <form method="post" action="MyPageServlet" enctype="multipart/form-data">
