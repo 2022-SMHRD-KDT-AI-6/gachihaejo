@@ -208,7 +208,7 @@ input{
                 <div class="row" >
                     <div class="col-md-4">
                         <div class="profile-img">
-                            <img src="image/<%= dto.getPhoto() %>" id="preview-image" onerror="this.src='https://item.kakaocdn.net/do/37e6b48e7bd846b1bcd85143382ab6ac9f5287469802eca457586a25a096fd31';">
+                            <img src="image/<%= dto.getPhoto() %>" id="preview-image" onerror="this.src='https://mblogthumb-phinf.pstatic.net/20150403_86/e2voo_14280514283502gas9_JPEG/kakako-00.jpg?type=w2';">
                             <div class="file btn btn-lg btn-primary">
                                 사진 바꾸기
                                 <input type="file" name = "file" id="input-image">
