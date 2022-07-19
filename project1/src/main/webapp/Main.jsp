@@ -120,6 +120,16 @@ a {text-decoration: none;}
 .h_random li {display: inline-block; margin: 20px 0 0 20px; }
 .h_random li a {font-size: 24px; color: black; font-weight: 500; transition: 0.2s;}
 .h_random li a:hover {color: #5865F2;}
+
+.logo {
+    display: inline-block;
+    width: 150px;
+    height: 50px;
+    background: url(./image/Testimg/welogo.png) no-repeat;
+    background-size: contain;
+}
+
+
 .h_menubar {margin: 25px 0;}
 .h_menubar li {display: inline-block; margin: 20px 0 0 20px; }
 .h_menubar li a {font-size: 24px; color: black; font-weight: 500; transition: 0.2s;}
@@ -185,17 +195,17 @@ input{
 <header id="header">
             <div class="h_cont">
                 <ul class="h_random">
-                    <li><a href="#">가치 해조</a></li>
-                    <li><a href="#">둘러보기</a></nav>
+                    <li><a href="view.jsp" class="logo"></a></li>
+                    <!--  li><a href="#">둘러보기</a></nav>-->
                 </ul>
                 <ul class="h_menubar">
-                    <li><a href="../main/main.html">Main</a></li>
-                    <li><a href="#">Post</a></li>
-                    <li><a href="#">Notice</a></li>
-                    <li><a href="#">About us</a></li>
+                    <li><a href="">파티 만들기</a></li>
+                    <li><a href="#">파티 검색</a></li>
+                    <li><a href="#">파티 기록</a></li>
+                    <!-- li><a href="#">About us</a></li-->
                 </ul>
                 <ul class="h_menu">
-                    <li><a href="#">__님 안녕하세요</a></li>
+                    <li><a href="login.jsp">login</a></li>
                     <li><a href="#">logout</a></li>
                     <li><a href="#">Mypage</a></li>
                 </ul>
