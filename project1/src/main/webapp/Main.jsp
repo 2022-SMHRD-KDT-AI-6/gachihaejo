@@ -205,9 +205,9 @@ input{
                     <!-- li><a href="#">About us</a></li-->
                 </ul>
                 <ul class="h_menu">
-                    <li><a href="login.jsp">login</a></li>
+                   <!-- <li><a href="login.jsp">login</a></li> --> 
+                    <li><a href="#">__님 안녕하세요</a></li>
                     <li><a href="#">logout</a></li>
-                    <li><a href="#">Mypage</a></li>
                 </ul>
             </div>
         </header>
