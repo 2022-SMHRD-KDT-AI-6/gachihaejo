@@ -184,8 +184,8 @@ a {text-decoration: none;}
 
 .logo {
     display: inline-block;
-    width: 200px;
-    height: 120px;
+    width: 150px;
+    height: 50px;
     background: url(./image/Testimg/welogo.png) no-repeat;
     background-size: contain;
 }
@@ -219,10 +219,10 @@ a {text-decoration: none;}
                     <!--  li><a href="#">둘러보기</a></nav>-->
                 </ul>
                 <ul class="h_menubar">
-                    <li><a href="">Main</a></li>
-                    <li><a href="#">Post</a></li>
-                    <li><a href="#">Notice</a></li>
-                    <li><a href="#">About us</a></li>
+                    <li><a href="">파티 만들기</a></li>
+                    <li><a href="#">파티 검색</a></li>
+                    <li><a href="#">파티 기록</a></li>
+                    <!-- li><a href="#">About us</a></li-->
                 </ul>
                 <ul class="h_menu">
                     <li><a href="login.jsp">login</a></li>
