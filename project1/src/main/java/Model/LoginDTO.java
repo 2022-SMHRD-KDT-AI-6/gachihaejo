@@ -39,7 +39,7 @@ public class LoginDTO {
 	}
 
 	public LoginDTO(String id, String pw, String nick, String phone, String email,
-			String profile, String photo) {
+			String profile, String photo,String name) {
 		this.id = id;
 		this.pw = pw;
 		this.nick = nick;
@@ -47,6 +47,7 @@ public class LoginDTO {
 		this.email = email;
 		this.profile = profile;
 		this.photo = photo;
+		this.name = name;
 	}
 
 
@@ -55,6 +56,10 @@ public class LoginDTO {
 		this.id = id;
 		this.pw = pw;
 	}
+
+
+
+
 
 	public String getId() {
 		return id;
