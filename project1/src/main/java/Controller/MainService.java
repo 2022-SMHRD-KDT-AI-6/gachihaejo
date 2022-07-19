@@ -24,7 +24,7 @@ public class MainService extends HttpServlet {
 		
 		ArrayList<MainDTO> dto = dao.select();
 		
-		System.out.println("���");
+
 		request.setAttribute("list", dto);
 		RequestDispatcher rd = request.getRequestDispatcher("view.jsp");
 		rd.forward(request, response);

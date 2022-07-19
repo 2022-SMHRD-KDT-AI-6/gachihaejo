@@ -115,7 +115,7 @@ footer{
     display: inline-block;
     width: 116px;
     height: 30px;
-    background: url(./image/re.png) no-repeat;
+    background: url(./image/Testimg/welogo.png) no-repeat;
     background-size: contain;
 }
 
@@ -344,7 +344,7 @@ i.fas.fa-bars {
 .header.sticky .logo{
     width: 116px;
     height: 30px;
-    background: url(./image/re.png) no-repeat;
+    background: url(./image/Testimg/welogo.png) no-repeat;
     background-size: contain;
 }
 

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>네이버 : 회원가입</title>
+<title>가치해조 : 회원가입</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style type="text/css">
 
@@ -178,10 +178,17 @@ a {text-decoration: none;}
 .h_cont {display: flex; justify-content: space-around; padding-left: 150px; padding-top:0;}
 
 .h_random {margin: 25px 0;}
-.h_random li {display: inline-block; margin: 20px 0 0 20px; }
+.h_random li {display: inline-block; margin: 20px 0 0 20px;  }
 .h_random li a {font-size: 24px; color: black; font-weight: 500; transition: 0.2s;}
 .h_random li a:hover {color: #5865F2;}
 
+.logo {
+    display: inline-block;
+    width: 200px;
+    height: 120px;
+    background: url(./image/Testimg/welogo.png) no-repeat;
+    background-size: contain;
+}
 
 .h_menubar {margin: 25px 0;}
 .h_menubar li {display: inline-block; margin: 20px 0 0 20px; }
@@ -208,11 +215,11 @@ a {text-decoration: none;}
 <header id="header">
             <div class="h_cont">
                 <ul class="h_random">
-                    <li><a href="#">가치 해조</a></li>
-                    <li><a href="#">둘러보기</a></nav>
+                    <li><a href="view.jsp" class="logo"></a></li>
+                    <!--  li><a href="#">둘러보기</a></nav>-->
                 </ul>
                 <ul class="h_menubar">
-                    <li><a href="../main/main.html">Main</a></li>
+                    <li><a href="">Main</a></li>
                     <li><a href="#">Post</a></li>
                     <li><a href="#">Notice</a></li>
                     <li><a href="#">About us</a></li>
