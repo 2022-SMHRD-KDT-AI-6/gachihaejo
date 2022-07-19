@@ -2,7 +2,7 @@
 <%@page import="Model.MemberupDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -191,7 +191,7 @@ input{
 	
 %>
 
-<c:set var="content" scope="session" value="<%= dto.getProfile()%>"/>
+
 <header id="header">
             <div class="h_cont">
                 <ul class="h_random">
@@ -322,8 +322,8 @@ input{
                                                 <label>자기소개</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <textarea rows="3" cols="41" name = "profile"><c:out value="${content}"/></textarea>
                                                 
+                                                <input type = "text" value= <%= dto.getProfile() %> name = "profile">
                                             </div>
                                         </div>
                             </div>
