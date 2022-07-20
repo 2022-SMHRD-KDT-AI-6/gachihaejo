@@ -225,8 +225,8 @@ a {text-decoration: none;}
                     <!-- li><a href="#">About us</a></li-->
                 </ul>
                   <ul class="h_menu">
-                   <li><a href="login.jsp">login</a></li>
-                   <li><a href="Main.jsp">mypage</a></li>
+                   <li><a href="login.jsp">로그인</a></li>
+                   <li><a href="Main.jsp">마이페이지</a></li>
                    
                 </ul>
             </div>

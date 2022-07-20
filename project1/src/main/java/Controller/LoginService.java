@@ -41,7 +41,7 @@ public class LoginService extends HttpServlet {
 		PrintWriter writer = response.getWriter();
 		
 		if((id!=null && id.equals("")) || (pw!=null && pw.equals(""))) {
-			writer.print("<script>alert('아이디 비밀번호를 입력해주세요');location.href='http://localhost:8081/project1/login.jsp'</script>");
+			writer.print("<script>alert('아이디 비밀번호를 입력해주세요');location.href='http://localhost:8082/project1/view.jsp'</script>");
 			writer.close();
 			if(session.getAttribute("user") != null) {
 				session.removeAttribute("user");
@@ -52,17 +52,18 @@ public class LoginService extends HttpServlet {
 				
 				System.out.println("로그인 성공");
 				session.setAttribute("user", dto2); // 세션에 데이터 저장
+				writer.print("<script>alert('로그인 성공!');location.href='http://localhost:8082/project1/view.jsp'</script>");
+				writer.close();
 			}
 			else {
 				System.out.println("로그인 실패");
-				writer.print("<script>alert('회원정보가 없습니다');location.href='http://localhost:8081/project1/login.jsp'</script>");
+				writer.print("<script>alert('회원정보가 없습니다');location.href='http://localhost:8082/project1/view.jsp'</script>");
 				writer.close();
 
 			}
 		}
 		System.out.println("끝");
 		
-		response.sendRedirect("Main.jsp");
 		
 		
 		

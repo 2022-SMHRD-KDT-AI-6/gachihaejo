@@ -1,0 +1,30 @@
+package Controller;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+@WebServlet("/LogoutService")
+public class LogoutService extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		System.out.println("[LogoutService]");
+		HttpSession session = request.getSession();
+
+		session.invalidate();
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter writer = response.getWriter();
+
+		writer.print("<script>alert('로그아웃');location.href='http://localhost:8082/project1/view.jsp'</script>");
+		writer.close();
+	}
+
+}

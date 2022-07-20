@@ -1,3 +1,4 @@
+<%@page import="Model.LoginDTO"%>
 <%@page import="Model.MainDAO"%>
 <%@page import="Model.MainDTO"%>
 <%@page import="java.util.ArrayList"%>
@@ -18,7 +19,19 @@
     <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+ <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/css/bootstrap.min.css'>
+ <link rel='stylesheet' href='assets/css/modaldemo.css'>
+<link rel='stylesheet' href='assets/css/modalstyle.css'> 
+
+ <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.3.1/css/all.css'>
+ <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js'></script>
+ 
+ <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js'></script> 
+
 </head>
+
+
+	
 <body>
 
 <%
@@ -77,24 +90,86 @@
     </header>
 <main>
 <%
-    String LoginId = (String)session.getAttribute("USER_ID");
-    boolean login = LoginId == null ? false : true;
+	boolean login = false;
+	LoginDTO dto = (LoginDTO)session.getAttribute("user");
+    if(dto != null && dto.getId() != null){
+    	login = true;
+    	System.out.println("현재 사용자 = " +dto.getId());
+    }
+    else{
+    	System.out.println("세션에 값 없음");
+    }
+    
 %>
     <section class="main main-img">
+    	<%if(login){%>
+    		<p class="main-txt"><%=dto.getId()%>님 환영합니다.<br>혼자 취미생활을 즐기기 힘들때! 저희가 도와드립니다.</p>
+    	<%}else{%>
         <p class="main-txt">혼자 취미생활을 즐기기 힘들때! 저희가 도와드립니다.</p>
-        <a href="" class="main-search">
-        
-			<%if(login){%>
-		<span class="main-search-txt">로그아웃</span>
+        <%} %>
+        <%if(login){%>
+         <a onclick="location.href='LogoutService'" class="main-search" data-toggle="modal">
+			<span class="main-search-txt">로그아웃</span>
 		
-			<%session.removeAttribute("USER_ID"); %>
-		
-			<%}else{%>
- 		<span class="main-search-txt">로그인 / 회원가입</span>
-			<%}%>
-           
         </a>
+        <%}else{%>
+        <a href="#loginModal" class="main-search" data-toggle="modal">
+		
+ 		<span class="main-search-txt">로그인 / 회원가입</span>
+			
+        </a>
+        <%}%>
     </section>
+
+
+
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header border-bottom-0">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-title text-center">
+          <h4>Login</h4>
+          <br> <br>
+        </div>
+        <div class="d-flex flex-column text-center">
+          <form id=loginForm action="./LoginService" method="post" >
+            <div class="form-group">
+              <input name="id" type="id" class="form-control" id="id"placeholder="아이디">
+            </div>
+            <div class="form-group">
+              <input name="pw" type="password" class="form-control" id="password1" placeholder="비밀번호">
+            </div>
+           <!--   <button type="button" class="btn btn-info btn-block btn-round">로그인</button> -->
+            <!--  a href="#" class="btn btn-default btn-block m-t-md"> 로그인 </a>-->
+            <div class="btn btn-default btn-block m-t-md">
+             <a href="javascript:goLogin()" class="newbtn btn-default btn-block m-t-md">로그인</a> <br><br>
+             
+            <a href="join.jsp" class="newbtn btn-default btn-block m-t-md"> 회원가입</a>
+            </div>
+          </form>
+
+      </div>
+    </div>
+	</div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
 
     <section class="spot section">
         <h2 class="sub-title">원하는 지역에서, 찾아보세요</h2>
@@ -198,18 +273,17 @@
                     <div id="PartyRecruitList">
                     <div class="hobby-item">
                     
-                        <a href="#" class="mainview-img" >
+                        <div class="mainview-img" ></div>
                             <img src="image/Testimg/be_happy.png" class="mainview-img"> 
                             <div class="pro_text">
                         <ul>
                                 <li>
-                                <%if(list.get(i).getParty_max_cnt()>=15){ %>
+                                <%int people = dao.cnt_people(list.get(i).getParty_seq()); %>
+                                <%if(people >= list.get(i).getParty_max_cnt()){ %>
                                     <span class="hobby_text_end">마감</span>
-                                   <%}else if(list.get(i).getParty_max_cnt()>=12){ %>
-                                    <span class="hobby_text_end">마감임박!</span>
-                                    <%}else{  %>
-                                      <span class="hobby_text_ing">모집중</span>                            	
-                                    <%}%>
+                                <%}else{%>
+                                	<span class="hobby_text_ing">모집중 <%=people%> / <%= list.get(i).getParty_max_cnt() %></span>                            	
+                                <%}%>
                                 </li>
                             <li>
                             <span class="sub-txt"> <%=list.get(i).getParty_title()%></span>
@@ -226,215 +300,7 @@
                 </div>
                 <%} %>
 
-               <%--  <div class="swiper-slide">
-                    <div id="PartyRecruitList">
-                    <div class="hobby-item">
-                    
-                        <a href="#" class="mainview-img" >
-                            <img src="image/Testimg/be_happy.png" class="mainview-img"> 
-                            <div class="pro_text">
-                                <li>
-                                   <%if(list.get(1).getParty_max_cnt()>=15){  %>
-                                    <span class="hobby_text_end">마감</span>
-                                   <%}else if(list.get(1).getParty_max_cnt()>=12){ %>
-                                    <span class="hobby_text_end">마감임박!</span>
-                                    <%}else{  %>
-                                      <span class="hobby_text_ing">모집중</span>                            	
-                                    <%}%>
-                                </li>
-                                <ul>
-                            <li>
-                            <span class="sub-txt"><%=list.get(1).getParty_title()%></span>
-                            </li>
-                            <li>
-                            <span class="sub-area"><%=list.get(1).getParty_addr()%></span>
-                            </li>
-                            
-                        </ul>
-                        </div>  
-                 
-                    </div>
-                    </div>
-                </div>
-
-                <div class="swiper-slide">
-                    <div id="PartyRecruitList">
-                    <div class="hobby-item">
-                    
-                        <a href="#" class="mainview-img" >
-                            <img src="image/Testimg/aat.jpg" class="mainview-img"> 
-                            <div class="pro_text">
-                                <li>
-                                    <span class="hobby_text_end">마감임박!</span>
-                                </li>
-                            <ul>
-                            <li>
-                            <span class="sub-txt">3파티제목: 파티제목을 엄청 길게쓰면 어떻게 될까요???</span>
-                            </li>
-                            <li>
-                            <span class="sub-area">위치: 위치도 만약에 엄청나게 길면 어떻게 될까요~~?길게길게길게더길게</span>
-                            </li>
-                            
-                        </ul>
-                        </div>  
-                 
-                    </div>
-                    </div>
-                </div>
-
-                <div class="swiper-slide">
-                    <div id="PartyRecruitList">
-                    <div class="hobby-item">
-                    
-                        <a href="#" class="mainview-img" >
-                            <img src="image/Testimg/좋아.jpg" class="mainview-img"> 
-                            <div class="pro_text">
-                                <li>
-                                    <span class="hobby_text_ing">모집중</span>
-                                </li>
-                                <ul>
-                                <li>
-                            <span class="sub-txt"><%=list.get(2).getParty_title()%></span>
-                            </li>
-                            <li>
-                            <span class="sub-area"><%=list.get(2).getParty_addr()%></span>
-                            </li>
-                            
-                        </ul>
-                        </div>  
-                 
-                    </div>
-                    </div>
-                </div>
-
-                <div class="swiper-slide">
-                    <div id="PartyRecruitList">
-                    <div class="hobby-item">
-                    
-                        <a href="#" class="mainview-img" >
-                            <img src="image/Testimg/바넬.jpg" class="mainview-img"> 
-                            <div class="pro_text">
-                                <li>
-                                    <span class="hobby_text_ing">모집중</span>
-                                </li>
-                                <ul>
-                                <li>
-                            <span class="sub-txt"><%=list.get(3).getParty_title()%></span>
-                            </li>
-                            <li>
-                            <span class="sub-area"><%=list.get(3).getParty_addr()%></span>
-                            </li>
-                            
-                        </ul>
-                        </div>  
-                 
-                    </div>
-                    </div>
-                </div>
-               
-                <div class="swiper-slide">
-                    <div id="PartyRecruitList">
-                    <div class="hobby-item">
-                    
-                        <a href="#" class="mainview-img" >
-                            <img src="image/Testimg/base.png" class="mainview-img"> 
-                            <div class="pro_text">
-                                <li>
-                                    <span class="hobby_text_ing">모집중</span>
-                                </li>
-                                <ul>
-                            <li>
-                            <span class="sub-txt"><%=list.get(4).getParty_title()%></span>
-                            </li>
-                            <li>
-                            <span class="sub-area"><%=list.get(4).getParty_addr()%></span>
-                            </li>
-                            
-                        </ul>
-                        </div>  
-                 
-                    </div>
-                    </div>
-                </div>
-                
-                <div class="swiper-slide">
-                    <div id="PartyRecruitList">
-                    <div class="hobby-item">
-                    
-                        <a href="#" class="mainview-img" >
-                            <img src="image/Testimg/base.png" class="mainview-img"> 
-                            <div class="pro_text">
-                                <li>
-                                    <span class="hobby_text_ing">모집중</span>
-                                </li>
-                                <ul>
-                            <li>
-                            <span class="sub-txt"><%=list.get(5).getParty_title()%></span>
-                            </li>
-                            <li>
-                            <span class="sub-area"><%=list.get(5).getParty_addr()%></span>
-                            </li>
-                            
-                        </ul>
-                        </div>  
-                 
-                    </div>
-                    </div>
-                </div>
-                
-                <div class="swiper-slide">
-                    <div id="PartyRecruitList">
-                    <div class="hobby-item">
-                    
-                        <a href="#" class="mainview-img" ></a>
-                            <img src="image/Testimg/be_happy.png" class="mainview-img"> 
-                            <div class="pro_text">
-                                <li>
-                                    <span class="hobby_text_ing">모집중</span>
-                                </li>
-                                <ul>
-                            <li>
-                            <span class="sub-txt"><%=list.get(6).getParty_title()%></span>
-                            </li>
-                            <li>
-                            <span class="sub-area"><%=list.get(6).getParty_addr()%></span>
-                            </li>
-                            
-                        </ul>
-                        </div>  
-                 
-                    </div>
-                    </div>
-                </div>
-                
-                
-                
-                <div class="swiper-slide">
-                    <div id="PartyRecruitList">
-                    <div class="hobby-item">
-                    
-                        <a href="#" class="mainview-img" >
-                            <img src="image/Testimg/base.png" class="mainview-img"> 
-                            <div class="pro_text">
-                                <li>
-                                    <span class="hobby_text_ing">모집중</span>
-                                </li>
-                                <ul>
-                            <li>
-                            <span class="sub-txt"><%=list.get(7).getParty_title()%></span>
-                            </li>
-                            <li>
-                            <span class="sub-area"><%=list.get(7).getParty_addr()%></span>
-                            </li>
-                            
-                        </ul>
-                        </div>  
-                 
-                    </div>
-                    </div>
-                </div> --%>
-              
-            
+                     
             </div>
         </div>
           </div>
@@ -457,18 +323,17 @@
                     <div id="PartyRecruitList">
                     <div class="hobby-item">
                     
-                        <a href="#" class="mainview-img" >
+                        <div class="mainview-img" ></div>
                             <img src="image/Testimg/be_happy.png" class="mainview-img"> 
                             <div class="pro_text">
                         <ul>
                                 <li>
-                                <%if(list.get(i).getParty_max_cnt()>=15){ %>
+                                <%int people = dao.cnt_people(list.get(i).getParty_seq()); %>
+                                <%if(people >= list.get(i).getParty_max_cnt()){ %>
                                     <span class="hobby_text_end">마감</span>
-                                   <%}else if(list.get(i).getParty_max_cnt()>=12){ %>
-                                    <span class="hobby_text_end">마감임박!</span>
-                                    <%}else{  %>
-                                      <span class="hobby_text_ing">모집중</span>                            	
-                                    <%}%>
+                                <%}else{%>
+                                	<span class="hobby_text_ing">모집중 <%=people%> / <%= list.get(i).getParty_max_cnt() %></span>                            	
+                                <%}%>
                                 </li>
                             <li>
                             <span class="sub-txt"> <%=list.get(i).getParty_title()%></span>
@@ -484,235 +349,7 @@
                     </div>
                 </div>
                 <%} %>
-<%-- 
-		
-                <div class="swiper-slide">
-                    <div id="PartyRecruitList">
-                    <div class="hobby-item">
-                    
-                        <a href="#" class="mainview-img" >
-                            <img src="image/Testimg/be_happy.png" class="mainview-img"> 
-                            <div class="pro_text">
-                        <ul>
-                                <li>
-                                    <span class="hobby_text_end">마감임박!</span>
-                                </li>
-                            <li>
-                            <span class="sub-txt"><%=list.get(8).getParty_title()%></span>
-                            </li>
-                            <li>
-                            <span class="sub-area"><%=list.get(8).getParty_addr()%></span>
-                            </li>
-                            
-                        </ul>
-                        </div>  
-                 
-                    </div>
-                    </div>
-                </div>
 
-                <div class="swiper-slide">
-                    <div id="PartyRecruitList">
-                    <div class="hobby-item">
-                    
-                        <a href="#" class="mainview-img" >
-                            <img src="" class="mainview-img"> 
-                            <div class="pro_text">
-                                <li>
-                                    <span class="hobby_text_end">마감임박!</span>
-                                </li>
-                                <ul>
-                            <li>
-                            <span class="sub-txt"><%=list.get(9).getParty_title()%></span>
-                            </li>
-                            <li>
-                            <span class="sub-area"><%=list.get(9).getParty_addr()%></span>
-                            </li>
-                            
-                        </ul>
-                        </div>  
-                 
-                    </div>
-                    </div>
-                </div>
-
-                <div class="swiper-slide">
-                    <div id="PartyRecruitList">
-                    <div class="hobby-item">
-                    
-                        <a href="#" class="mainview-img" >
-                            <img src="image/Testimg/aat.jpg" class="mainview-img"> 
-                            <div class="pro_text">
-                                <li>
-                                    <span class="hobby_text_end">마감임박!</span>
-                                </li>
-                            <ul>
-                            <li>
-                            <span class="sub-txt">3파티제목: 파티제목을 엄청 길게쓰면 어떻게 될까요???</span>
-                            </li>
-                            <li>
-                            <span class="sub-area">위치: 위치도 만약에 엄청나게 길면 어떻게 될까요~~?길게길게길게더길게</span>
-                            </li>
-                            
-                        </ul>
-                        </div>  
-                 
-                    </div>
-                    </div>
-                </div>
-
-                <div class="swiper-slide">
-                    <div id="PartyRecruitList">
-                    <div class="hobby-item">
-                    
-                        <a href="#" class="mainview-img" >
-                            <img src="image/Testimg/좋아.jpg" class="mainview-img"> 
-                            <div class="pro_text">
-                                <li>
-                                    <span class="hobby_text_ing">모집중</span>
-                                </li>
-                                <ul>
-                                <li>
-                            <span class="sub-txt"><%=list.get(10).getParty_title()%></span>
-                            </li>
-                            <li>
-                            <span class="sub-area"><%=list.get(10).getParty_addr()%></span>
-                            </li>
-                            
-                        </ul>
-                        </div>  
-                 
-                    </div>
-                    </div>
-                </div>
-
-                <div class="swiper-slide">
-                    <div id="PartyRecruitList">
-                    <div class="hobby-item">
-                    
-                        <a href="#" class="mainview-img" >
-                            <img src="image/Testimg/바넬.jpg" class="mainview-img"> 
-                            <div class="pro_text">
-                                <li>
-                                    <span class="hobby_text_ing">모집중</span>
-                                </li>
-                                <ul>
-                                <li>
-                            <span class="sub-txt"><%=list.get(0).getParty_title()%></span>
-                            </li>
-                            <li>
-                            <span class="sub-area"><%=list.get(0).getParty_addr()%></span>
-                            </li>
-                            
-                        </ul>
-                        </div>  
-                 
-                    </div>
-                    </div>
-                </div>
-               
-                <div class="swiper-slide">
-                    <div id="PartyRecruitList">
-                    <div class="hobby-item">
-                    
-                        <a href="#" class="mainview-img" >
-                            <img src="image/Testimg/base.png" class="mainview-img"> 
-                            <div class="pro_text">
-                                <li>
-                                    <span class="hobby_text_ing">모집중</span>
-                                </li>
-                                <ul>
-                            <li>
-                            <span class="sub-txt"><%=list.get(0).getParty_title()%></span>
-                            </li>
-                            <li>
-                            <span class="sub-area"><%=list.get(0).getParty_addr()%></span>
-                            </li>
-                            
-                        </ul>
-                        </div>  
-                 
-                    </div>
-                    </div>
-                </div>
-                
-                <div class="swiper-slide">
-                    <div id="PartyRecruitList">
-                    <div class="hobby-item">
-                    
-                        <a href="#" class="mainview-img" >
-                            <img src="image/Testimg/base.png" class="mainview-img"> 
-                            <div class="pro_text">
-                                <li>
-                                    <span class="hobby_text_ing">모집중</span>
-                                </li>
-                                <ul>
-                            <li>
-                            <span class="sub-txt"><%=list.get(0).getParty_title()%></span>
-                            </li>
-                            <li>
-                            <span class="sub-area"><%=list.get(0).getParty_addr()%></span>
-                            </li>
-                            
-                        </ul>
-                        </div>  
-                 
-                    </div>
-                    </div>
-                </div>
-                
-                <div class="swiper-slide">
-                    <div id="PartyRecruitList">
-                    <div class="hobby-item">
-                    
-                        <a href="#" class="mainview-img" >
-                            <img src="image/Testimg/be_happy.png" class="mainview-img"> 
-                            <div class="pro_text">
-                                <li>
-                                    <span class="hobby_text_ing">모집중</span>
-                                </li>
-                                <ul>
-                            <li>
-                            <span class="sub-txt"><%=list.get(0).getParty_title()%></span>
-                            </li>
-                            <li>
-                            <span class="sub-area"><%=list.get(0).getParty_addr()%></span>
-                            </li>
-                            
-                        </ul>
-                        </div>  
-                 
-                    </div>
-                    </div>
-                </div>
-                
-                
-                
-                <div class="swiper-slide">
-                    <div id="PartyRecruitList">
-                    <div class="hobby-item">
-                    
-                        <a href="#" class="mainview-img" >
-                            <img src="image/Testimg/base.png" class="mainview-img"> 
-                            <div class="pro_text">
-                                <li>
-                                    <span class="hobby_text_ing">모집중</span>
-                                </li>
-                                <ul>
-                            <li>
-                            <span class="sub-txt"><%=list.get(0).getParty_title()%></span>
-                            </li>
-                            <li>
-                            <span class="sub-area"><%=list.get(0).getParty_addr()%></span>
-                            </li>
-                            
-                        </ul>
-                        </div>  
-                 
-                    </div>
-                    </div>
-                </div>
-               --%>
             
             </div>
         </div>
@@ -858,6 +495,19 @@ new Swiper('.hotmainview .hotswiper', {
   }
 });
 
+
+function goLogin(){
+	var form = $('#loginForm');
+    
+    form.submit();
+}
+ 
+$('#loginModal').on('click',()=> {
+	  $('#loginModal').modal('show');
+	    $(function () {
+	      $('[data-toggle="tooltip"]').tooltip()
+	    })
+	  });
 
 
 
