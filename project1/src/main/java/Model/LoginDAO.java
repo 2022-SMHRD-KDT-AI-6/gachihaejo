@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class LoginDAO {
 	Connection conn = null;
@@ -183,5 +184,51 @@ public int checkId(String id) {
 			db_close();
 		}return idCheck;
 	}
+
+// 이미지 불러오기용 
+public ArrayList<LoginDTO> show_all() {
+	ArrayList<LoginDTO> list = new ArrayList<>();
+	
+	db_conn();
+	
+	try {
+		
+		String sql = "select * from tbl_user";
+		
+		psmt = conn.prepareStatement(sql);
+	
+		
+		rs = psmt.executeQuery();
+		
+	
+		
+		while (rs.next()) {
+			String id = rs.getString(1);
+			String pw = rs.getString(2);
+			String name = rs.getString(3);
+			String nick = rs.getString(4);
+			String birthdate = rs.getString(5);
+			String gender = rs.getString(6);
+			String phone = rs.getString(7);
+			String email = rs.getString(8);
+			String profile = rs.getString(9);
+			String photo = rs.getString(10);
+			String type = rs.getString(11);
+			String joindate = rs.getString(12);
+			
+			LoginDTO ldto = new LoginDTO(id, pw, name, nick, birthdate, gender, email, phone, profile, photo, type, joindate);
+			
+			list.add(ldto);
+		}
+	} catch (Exception e) {
+	e.printStackTrace();
+	} finally {
+		db_close();
+	}
+	return list;
+	
+}
+
+
 	
 }

@@ -71,5 +71,10 @@ CREATE TABLE tbl_user
 );
 select * from tbl_user;
 
+select * from tbl_party;
+
+
+
+
 
 
