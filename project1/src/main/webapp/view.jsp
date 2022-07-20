@@ -76,10 +76,23 @@
         </div>
     </header>
 <main>
+<%
+    String LoginId = (String)session.getAttribute("USER_ID");
+    boolean login = LoginId == null ? false : true;
+%>
     <section class="main main-img">
         <p class="main-txt">혼자 취미생활을 즐기기 힘들때! 저희가 도와드립니다.</p>
         <a href="" class="main-search">
-            <span class="main-search-txt">로그인 / 회원가입</span>
+        
+			<%if(login){%>
+		<span class="main-search-txt">로그아웃</span>
+		
+			<%session.removeAttribute("USER_ID"); %>
+		
+			<%}else{%>
+ 		<span class="main-search-txt">로그인 / 회원가입</span>
+			<%}%>
+           
         </a>
     </section>
 
@@ -179,6 +192,8 @@
               <div class="swiper-wrapper">
 
 
+
+				<% for(int i =0; i<list.size(); i++){%>
                 <div class="swiper-slide">
                     <div id="PartyRecruitList">
                     <div class="hobby-item">
@@ -188,13 +203,19 @@
                             <div class="pro_text">
                         <ul>
                                 <li>
+                                <%if(list.get(i).getParty_max_cnt()>=15){ %>
+                                    <span class="hobby_text_end">마감</span>
+                                   <%}else if(list.get(i).getParty_max_cnt()>=12){ %>
                                     <span class="hobby_text_end">마감임박!</span>
+                                    <%}else{  %>
+                                      <span class="hobby_text_ing">모집중</span>                            	
+                                    <%}%>
                                 </li>
                             <li>
-                            <span class="sub-txt"> <%=list.get(0).getParty_title()%></span>
+                            <span class="sub-txt"> <%=list.get(i).getParty_title()%></span>
                             </li>
                             <li>
-                            <span class="sub-area"><%=list.get(0).getParty_addr()%></span>
+                            <span class="sub-area"><%=list.get(i).getParty_addr()%></span>
                             </li>
                             
                         </ul>
@@ -203,8 +224,9 @@
                     </div>
                     </div>
                 </div>
+                <%} %>
 
-                <div class="swiper-slide">
+               <%--  <div class="swiper-slide">
                     <div id="PartyRecruitList">
                     <div class="hobby-item">
                     
@@ -212,7 +234,13 @@
                             <img src="image/Testimg/be_happy.png" class="mainview-img"> 
                             <div class="pro_text">
                                 <li>
+                                   <%if(list.get(1).getParty_max_cnt()>=15){  %>
+                                    <span class="hobby_text_end">마감</span>
+                                   <%}else if(list.get(1).getParty_max_cnt()>=12){ %>
                                     <span class="hobby_text_end">마감임박!</span>
+                                    <%}else{  %>
+                                      <span class="hobby_text_ing">모집중</span>                            	
+                                    <%}%>
                                 </li>
                                 <ul>
                             <li>
@@ -404,7 +432,7 @@
                  
                     </div>
                     </div>
-                </div>
+                </div> --%>
               
             
             </div>
@@ -423,7 +451,41 @@
             <div class="hotswiper">
               <div class="swiper-wrapper">
 
-
+	
+				<% for(int i =0; i<list.size(); i++){%>
+                <div class="swiper-slide">
+                    <div id="PartyRecruitList">
+                    <div class="hobby-item">
+                    
+                        <a href="#" class="mainview-img" >
+                            <img src="image/Testimg/be_happy.png" class="mainview-img"> 
+                            <div class="pro_text">
+                        <ul>
+                                <li>
+                                <%if(list.get(i).getParty_max_cnt()>=15){ %>
+                                    <span class="hobby_text_end">마감</span>
+                                   <%}else if(list.get(i).getParty_max_cnt()>=12){ %>
+                                    <span class="hobby_text_end">마감임박!</span>
+                                    <%}else{  %>
+                                      <span class="hobby_text_ing">모집중</span>                            	
+                                    <%}%>
+                                </li>
+                            <li>
+                            <span class="sub-txt"> <%=list.get(i).getParty_title()%></span>
+                            </li>
+                            <li>
+                            <span class="sub-area"><%=list.get(i).getParty_addr()%></span>
+                            </li>
+                            
+                        </ul>
+                        </div>  
+                 
+                    </div>
+                    </div>
+                </div>
+                <%} %>
+<%-- 
+		
                 <div class="swiper-slide">
                     <div id="PartyRecruitList">
                     <div class="hobby-item">
@@ -436,10 +498,10 @@
                                     <span class="hobby_text_end">마감임박!</span>
                                 </li>
                             <li>
-                            <span class="sub-txt"><%=list.get(0).getParty_title()%></span>
+                            <span class="sub-txt"><%=list.get(8).getParty_title()%></span>
                             </li>
                             <li>
-                            <span class="sub-area"><%=list.get(0).getParty_addr()%></span>
+                            <span class="sub-area"><%=list.get(8).getParty_addr()%></span>
                             </li>
                             
                         </ul>
@@ -461,10 +523,10 @@
                                 </li>
                                 <ul>
                             <li>
-                            <span class="sub-txt"><%=list.get(0).getParty_title()%></span>
+                            <span class="sub-txt"><%=list.get(9).getParty_title()%></span>
                             </li>
                             <li>
-                            <span class="sub-area"><%=list.get(0).getParty_addr()%></span>
+                            <span class="sub-area"><%=list.get(9).getParty_addr()%></span>
                             </li>
                             
                         </ul>
@@ -511,10 +573,10 @@
                                 </li>
                                 <ul>
                                 <li>
-                            <span class="sub-txt"><%=list.get(0).getParty_title()%></span>
+                            <span class="sub-txt"><%=list.get(10).getParty_title()%></span>
                             </li>
                             <li>
-                            <span class="sub-area"><%=list.get(0).getParty_addr()%></span>
+                            <span class="sub-area"><%=list.get(10).getParty_addr()%></span>
                             </li>
                             
                         </ul>
@@ -650,13 +712,13 @@
                     </div>
                     </div>
                 </div>
-              
+               --%>
             
             </div>
         </div>
           </div>
         </div>
-        </section>  
+     </section>  
         
 </main>
 

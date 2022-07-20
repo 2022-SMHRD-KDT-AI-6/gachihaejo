@@ -488,7 +488,18 @@ i.fas.fa-bars {
     padding: 20px;
     
 }
-
+.hobby_text_ending
+{
+    display: block;
+    width: 70px;
+    font-size: 10px;
+    background: rgb(240, 68, 58);
+    color: #fff;
+    border-radius: 50px;
+    text-align: center;
+    padding: 3px 0px;
+    margin: 0 0 15px 2px;
+}
 .hobby_text_end 
 {
     display: block;

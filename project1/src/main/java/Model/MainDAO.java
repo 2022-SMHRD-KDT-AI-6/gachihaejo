@@ -12,7 +12,7 @@ public class MainDAO {
 	Connection conn = null;
 	ResultSet rs = null;
 		
-	private void getCorn() {
+	private void getConn() {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			String url = "jdbc:oracle:thin:@project-db-stu.ddns.net:1524:xe";
@@ -47,7 +47,7 @@ public class MainDAO {
 		public ArrayList<MainDTO> select() {
 			ArrayList<MainDTO> list = new ArrayList<>();
 			
-			getCorn();
+			getConn();
 			
 			try {
 				

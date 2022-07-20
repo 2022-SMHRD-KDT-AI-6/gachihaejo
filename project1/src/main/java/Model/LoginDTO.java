@@ -22,6 +22,25 @@ public class LoginDTO {
 	
 
 	public LoginDTO(String id, String pw, String name, String nick, String birth, String gender, String email,
+			String phone, String profile, String photo, String type, String joindate) {
+		super();
+		this.id = id;
+		this.pw = pw;
+		this.name = name;
+		this.nick = nick;
+		this.birth = birth;
+		this.gender = gender;
+		this.email = email;
+		this.phone = phone;
+		this.profile = profile;
+		this.photo = photo;
+		this.type = type;
+		this.joindate = joindate;
+	}
+
+
+
+	public LoginDTO(String id, String pw, String name, String nick, String birth, String gender, String email,
 			String phone, String profile, String photo) {
 		
 		this.id = id;
