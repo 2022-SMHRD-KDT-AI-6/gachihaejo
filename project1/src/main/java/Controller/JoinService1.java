@@ -80,7 +80,7 @@ public class JoinService1 extends HttpServlet {
 		
 		if(row == 1) {
 			System.out.println("회원가입 성공");
-			writer.print("<script>alert('회원가입 성공 !');location.href='http://localhost:8081/project1/login.jsp'</script>");
+			writer.print("<script>alert('회원가입 성공 !');location.href='http://localhost:8081/project1/view.jsp'</script>");
 			writer.close();
 //			request.setAttribute("user_id", id);	
 //			

@@ -219,15 +219,15 @@ a {text-decoration: none;}
                     <!--  li><a href="#">둘러보기</a></nav>-->
                 </ul>
                 <ul class="h_menubar">
-                    <li><a href="">파티 만들기</a></li>
-                    <li><a href="#">파티 검색</a></li>
-                    <li><a href="#">파티 기록</a></li>
+                   <!--  <li><a href="">파티 만들기</a></li> -->
+                   <!-- <li><a href="#">파티 검색</a></li> -->
+                   <!--   <li><a href="#">파티 기록</a></li>-->
                     <!-- li><a href="#">About us</a></li-->
                 </ul>
-                <ul class="h_menu">
-                    <li><a href="login.jsp">login</a></li>
-                    <li><a href="#">logout</a></li>
-                    <li><a href="#">Mypage</a></li>
+                  <ul class="h_menu">
+                   <li><a href="login.jsp">login</a></li>
+                   <li><a href="Main.jsp">mypage</a></li>
+                   
                 </ul>
             </div>
         </header>
