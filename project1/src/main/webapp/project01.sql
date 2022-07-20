@@ -1,5 +1,7 @@
 select * from tbl_user;
 
+select * from TBL_PARTY
+
 select * from tbl_user where user_id = 'ㅗㅗ' and user_pw = 0000
 
 select * from tbl_user;
@@ -47,6 +49,8 @@ CREATE TABLE tbl_user
 );
 ALTER TABLE tbl_user ADD CONSTRAINT uk_tbl_user_user_nick UNIQUE(user_nick);
 select * from tbl_user;
+
+select * from tbl_party;
 
 SELECT*from ALL_CONSTRAINTS WHERE TABLE_NAME="tbl_user"
 

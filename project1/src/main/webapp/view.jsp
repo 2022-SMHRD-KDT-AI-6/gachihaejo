@@ -66,25 +66,25 @@
                 </ul>
             </div>
             <div class="search-bar">
-                <div class="search-menu">
-                    <label for="location">위치</label>
-                    <input id="location" type="text" placeholder="어디에서 즐기고싶으세요?">
+                <div class="search-menu" onclick="location.href='CreatePartys.jsp'">
+                    <label  for="location">파티 만들기</label>
+                    <!-- <input id="location" type="text"> -->
                 </div>
-                <div  class="search-menu">
-                    <label for="checkin">날짜</label>
-                    <input id="checkin" type="date" placeholder="날짜 입력">
-                </div>
-                <div class="search-menu">
-                    <label for="checkout">시간</label>
-                    <input id="checkout" type="text" placeholder="시간 입력">
+                <div  class="search-menu" onclick="location.href='SearchPartys.jsp'">
+                    <label for="checkin">파티 찾기</label>
+                    <!-- <input id="checkin" type="date" > -->
                 </div>
                 <div class="search-menu">
-                    <label for="number">인원</label>
-                    <input id="number" type="text" placeholder="사람 입력">
+                    <label for="checkout">파티 관리</label>
+                    <!-- <input id="checkout" type="text"> -->
                 </div>
-                <div class="search-btn">
+                <div class="search-menu" onclick="location.href='Main.jsp'">
+                    <label for="number">마이페이지</label>
+                   <!--  <input id="number" type="text"> -->
+                </div>
+              <!--   <div class="search-btn">
                     <i class="fas fa-search"></i>
-                </div>
+                </div> -->
             </div>
         </div>
     </header>
@@ -273,8 +273,29 @@
                     <div id="PartyRecruitList">
                     <div class="hobby-item">
                     
+                    <% 
+                    	String[] cateList = {"sports", "game", "cooking", "music"};
+                    	String[] imgName = new String[list.size()];
+                    	
+                    	for(int j = 0; j < list.size(); j++){
+                    		System.out.println("***********************************************");
+                    		for(int k = 0; k < cateList.length; k++){
+                    			if(list.get(j).getParty_type().equals( cateList[k]) ){
+                        			imgName[j] =  cateList[k] + ".png";
+                        			break;
+                        		}
+                    			else{
+                    				
+                    				System.out.println("리스트 카테고리 이름 = " + list.get(j).getParty_type());
+                    				System.out.println("카테리스트 이름 = " + cateList[k]);
+                    			}
+                    		}
+                    	}
+                    %>
+                    
+                    	
                         <div class="mainview-img" ></div>
-                            <img src="image/Testimg/be_happy.png" class="mainview-img"> 
+                            <img src="image/Testimg/<%=imgName[i]%>" class="mainview-img"> 
                             <div class="pro_text">
                         <ul>
                                 <li>
@@ -312,7 +333,7 @@
 
 
         <section class="hobbyteam section">
-            <h2 class="sub-title">이번주의 가장 <strong>인기있는</strong> 파티!</h2>
+            <h2 class="sub-title"> <strong>곧!</strong>마감되는 파티! 서두르세요</h2>
                <div class="hotmainview">
             <div class="hotswiper">
               <div class="swiper-wrapper">
@@ -508,6 +529,13 @@ $('#loginModal').on('click',()=> {
 	      $('[data-toggle="tooltip"]').tooltip()
 	    })
 	  });
+
+
+
+
+
+
+
 
 
 
