@@ -202,7 +202,7 @@ input{
                     <li><a href="">파티 만들기</a></li>
                     <li><a href="#">파티 검색</a></li>
                     <li><a href="#">파티 기록</a></li>
-                    <!-- li><a href="#">About us</a></li-->
+                    <li><a href="#">About us</a></li>
                 </ul>
                 <ul class="h_menu">
                    <!-- <li><a href="login.jsp">login</a></li> --> 
