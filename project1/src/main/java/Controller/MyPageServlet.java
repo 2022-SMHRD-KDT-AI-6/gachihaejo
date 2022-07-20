@@ -36,6 +36,8 @@ public class MyPageServlet extends HttpServlet {
 		// 인코딩 방식
 		String encoding = "utf-8";
 		
+		
+		
 		// multipart 데이터를 받을 수 있는 request 생성
 		MultipartRequest multi = new MultipartRequest(
 				request, // 원본 request 필요
@@ -54,8 +56,17 @@ public class MyPageServlet extends HttpServlet {
 		String birth = multi.getParameter("birth");
 		String gender = multi.getParameter("gender");
 		
+		
 		String photo = multi.getFilesystemName("file");
+		String photo2 = multi.getParameter("file2");
+		
+		
 		System.out.println("전송 받은 파일 : " + photo);
+		System.out.println("전송 받은 파일 : " + photo2);
+		
+		if(photo == null ) {
+			photo = photo2;
+		}
 		
 		// 내가 확인하면서 할 것
 //		MemberDAO dao = new MemberDAO();
@@ -83,8 +94,13 @@ public class MyPageServlet extends HttpServlet {
 		// -> 합치고 나서 사용!
 		int cnt = dao.update(udto);
 		
+		
+		
 		if(cnt > 0) {
 			// 성공 : cnt = 1
+			
+		
+			
 			System.out.println("개인정보 수정 성공");
 			
 			System.out.println("수정 비번 : " + udto.getPw());

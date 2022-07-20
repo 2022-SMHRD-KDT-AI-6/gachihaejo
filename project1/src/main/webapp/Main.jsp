@@ -202,7 +202,7 @@ input{
                     <li><a href="">파티 만들기</a></li>
                     <li><a href="#">파티 검색</a></li>
                     <li><a href="#">파티 기록</a></li>
-                    <li><a href="#">About us</a></li>
+                    <!-- li><a href="#">About us</a></li-->
                 </ul>
                 <ul class="h_menu">
                    <!-- <li><a href="login.jsp">login</a></li> --> 
@@ -219,10 +219,11 @@ input{
                 <div class="row" >
                     <div class="col-md-4">
                         <div class="profile-img">
-                            <img src="image/<%= dto.getPhoto() %>" id="preview-image" onerror="this.src='https://mblogthumb-phinf.pstatic.net/20150403_86/e2voo_14280514283502gas9_JPEG/kakako-00.jpg?type=w2';">
+                            <img src="image/<%= dto.getPhoto() %>"  id="preview-image" onerror="this.src='https://mblogthumb-phinf.pstatic.net/20150403_86/e2voo_14280514283502gas9_JPEG/kakako-00.jpg?type=w2';">
                             <div class="file btn btn-lg btn-primary">
                                 사진 바꾸기
                                 <input type="file" name = "file" id="input-image">
+                                <input type="text" name="file2" style="display: none;" value="<%= dto.getPhoto() %>">
                             </div>
                         </div>
                     </div>
@@ -243,7 +244,6 @@ input{
                             </ul>
                         </div>
                     </div>
-                    
                 </div>
                 <div class="row">
                     <div class="col-md-4">
