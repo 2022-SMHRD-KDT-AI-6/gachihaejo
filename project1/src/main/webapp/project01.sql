@@ -1,6 +1,6 @@
 select * from tbl_user;
 
-select * from tbl_user where user_id = '�뀠�뀠' and user_pw = 1234
+select * from tbl_user where user_id = 'ㅗㅗ' and user_pw = 0000
 
 select * from tbl_user;
 
@@ -48,7 +48,7 @@ CREATE TABLE tbl_user
 ALTER TABLE tbl_user ADD CONSTRAINT uk_tbl_user_user_nick UNIQUE(user_nick);
 select * from tbl_user;
 
-SELECT혻*혻FROM혻ALL_CONSTRAINTS WHERE TABLE_NAME혻=혻"tbl_user"
+SELECT*from ALL_CONSTRAINTS WHERE TABLE_NAME="tbl_user"
 
 drop table tbl_user cascade constraints;
 
@@ -70,6 +70,11 @@ CREATE TABLE tbl_user
      
 );
 select * from tbl_user;
+
+select * from tbl_party;
+
+
+
 
 
 
