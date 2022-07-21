@@ -28,7 +28,6 @@ public class HistoryParty_cp_list extends HttpServlet {
 		if(cp_list != null) {
 			
 			System.out.println("상세기록 조회 성공");
-			System.out.println(cp_list.size());
 			request.setAttribute("cp_list", cp_list);
 			
 		}

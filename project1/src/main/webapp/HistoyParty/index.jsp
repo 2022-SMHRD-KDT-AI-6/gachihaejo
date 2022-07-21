@@ -11,13 +11,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>같이해조</title>
+<title>같이해조 || 파티관리</title>
 </head>
-	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/style.css">
 
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	
-	<link rel="stylesheet" href="css/style.css">
 <style>
 .logo {
     display: inline-block;
@@ -49,16 +48,11 @@
 <%
 	history_SP_niceDAO sp_dao = new history_SP_niceDAO();
 	history_CP_niceDAO dao = new history_CP_niceDAO();
-			// 로그인 한 사람이 파티 기록을 누르면 세가지 버튼이 있어야함.
-			// 1.만든파티 2.신청한 파티 3.이전 파티기록 
-			// 각 버튼 클릭시 해당 테이블 생성
-		LoginDTO user = (LoginDTO)session.getAttribute("user");
-		String user_id = user.getId();
-		String user_nick = user.getNick();
-
-		 	ArrayList<history_CP_niceDTO> list = dao.CP_select(user_id);
-		 	ArrayList<history_SP_niceDTO> sp_list = sp_dao.SP_select(user_id);
-		 	
+	LoginDTO user = (LoginDTO)session.getAttribute("user");
+	String user_id = user.getId();
+	String user_nick = user.getNick();
+	ArrayList<history_CP_niceDTO> list = dao.CP_select(user_id);
+	ArrayList<history_SP_niceDTO> sp_list = sp_dao.SP_select(user_id);
 %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -70,6 +64,7 @@
                 <ul class="h_menubar">
                     <li><a href="../CreatePartys.jsp">파티 만들기</a></li>
                     <li><a href="../SearchPartys.jsp">파티 찾기</a></li>
+                    <li><a href="index.jsp">파티 관리</a></li>
                     <li><a href="../Main.jsp">마이페이지</a></li>
                 </ul>
                 <ul class="h_menu">
@@ -85,7 +80,7 @@
 					<h2 class="heading-section">
 					<button class = 'btn btn-outline-primary' id="history_CP">만든 파티</button>
 					<button class = 'btn btn-outline-primary' id="history_SP">신청한 파티</button>
-					<button class = 'btn btn-outline-primary' id="history">이전 파티 기록</button></h2>
+					<button class = 'btn btn-outline-primary' onclick = "location.href = '../Party_history.jsp'">이전 파티 기록</button></h2>
 				</div>
 			</div>
 			
@@ -107,7 +102,7 @@
 					base += "<tr>"; 
 					base += "<th>제목</th>";		      
 					base += "<th>주소</th>";
-					base += "<th>인원</th>";
+					base += "<th>마감인원</th>";
 					base += "<th>날짜</th>";
 					base += "<th></th>";
 					base += "</tr>";
@@ -116,11 +111,12 @@
 					
 					<% for(int i = 0; i < list.size(); i++){%>
 						base += "<tr>";
-						base += "<th scope='row'> <a href = 'HistoryParty_cp_list?party_seq=<%=list.get(i).getParty_seq()%>'> <%= list.get(i).getParty_title()%> </a></th>";
+						base += "<th scope='row'> <a href = '../HistoryParty_cp_list?party_seq=<%=list.get(i).getParty_seq()%>'> <%= list.get(i).getParty_title()%> </a></th>";
 						base += "<td> <%= list.get(i).getParty_addr() %> </td>";
 						base += "<td> <%= list.get(i).getParty_max_cnt() %> </td>";
 						base += "<td> <%= list.get(i).getParty_end_date() %> </td>";
 						base += "<td><button class = 'btn btn-outline-primary' id = 'delete_<%=i%>'>취 소</button></td>";
+						base += "</tr>";
 					<%}%>
 					
 					base += "</tbody>"; 
@@ -142,11 +138,11 @@
 				base += "<table class='table table-striped' id = 'CP_party'>";
 				base += "<thead>";
 				base += "<tr>"; 
-				base += "<th>파티번호</th>";		      
-				base += "<th>제목</th>";
-				base += "<th>신청날짜</th>";
-				base += "<th>참가여부</th>";
-				base += "<th>참가여부</th>";
+				base += "<th>제목</th>";		      
+				base += "<th>주소</th>";
+				base += "<th>마감인원</th>";
+				base += "<th>신청일자</th>";
+				base += "<th></th>";
 				base += "</tr>";
 				base += "</thead>";
 				base += "<tbody>";
@@ -161,7 +157,7 @@
 					base += "<td> <%= list.get(i).getParty_addr() %> </td>";
 					base += "<td> <%= list.get(i).getParty_max_cnt() %> </td>";
 					base += "<td> <%= list.get(i).getParty_end_date() %> </td>";
-					base += "<td><button class = 'btn btn-outline-primary' id = 'delete_<%=i%>'>취 소</button></td>";
+					base += "<td><button class = 'btn btn-outline-primary' id = 'party_cancel_<%=i%>'>취 소</button></td>";
 					base += "</tr>";
 						
 				<%}%>

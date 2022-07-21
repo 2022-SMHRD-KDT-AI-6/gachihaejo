@@ -238,5 +238,44 @@ public class history_SP_niceDAO {
 		
 	}
 	
+	public ArrayList<SearchPartyDTO> history(String user_id) { // 내가 만든 파티, 내가 참석했던 파티들의 마감날짜 지난 파티 정보
+		ArrayList<SearchPartyDTO> list = new ArrayList<>();
+		db_Corn();
+		try {
+
+			String sql = "select * from tbl_party where user_id = ? or party_seq in (select party_seq from tbl_party where party_seq in (select party_seq from tbl_request_party where user_id = ?)) and sysdate > party_end_date";
+
+			psmt = conn.prepareStatement(sql);
+
+			psmt.setString(1, user_id);
+			psmt.setString(2, user_id);
+
+			rs = psmt.executeQuery();
+
+			while (rs.next()) {
+				SearchPartyDTO dto = new SearchPartyDTO();
+
+				dto.setParty_seq(rs.getInt("party_seq"));
+				dto.setParty_title(rs.getString("party_title"));
+				dto.setParty_type(rs.getString("party_type"));
+				dto.setParty_content(rs.getString("party_content"));
+				dto.setParty_addr(rs.getString("party_addr"));
+				dto.setParty_max_cnt(rs.getInt("party_max_cnt"));
+				dto.setParty_end_date(rs.getString("party_end_date"));
+				dto.setReg_date(rs.getString("reg_date"));
+				dto.setUser_id(rs.getString("user_id"));
+				dto.setParty_latitude(rs.getDouble("party_latitude"));
+				dto.setParty_longitude(rs.getDouble("party_longitude"));
+				list.add(dto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			db_close();
+		}
+		return list;
+
+	}
+	
 	
 }
