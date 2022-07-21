@@ -190,6 +190,13 @@
 										<option value="game">게임
 										<option value="cooking">요리
 										<option value="music">음악
+										<option value="art">미술
+										<option value="movie">영화
+										<option value="pet">반려동물
+
+										<option value="craft">공예
+										<option value="improve">자기계발
+										<option value="travle">여행
 										</select>
 									</td>
 								</tr>
