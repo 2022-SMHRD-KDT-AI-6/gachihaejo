@@ -60,8 +60,8 @@
                     <!-- <input id="checkin" type="date" > -->
                 </div>
                
-                <div class="search-minimenu">
-                    <label for="checkout">파티 관리</label>
+                <div class="search-minimenu" onclick="location.href='HistoyParty/index.jsp'">
+                    <label for="checkout" >파티 관리</label>
                     <!-- <input id="checkout" type="text"> -->
                 </div>
                
