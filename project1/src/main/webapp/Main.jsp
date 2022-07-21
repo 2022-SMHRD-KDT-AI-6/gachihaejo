@@ -185,7 +185,7 @@ input{
 	
 	if(dto == null){
 		System.out.println("test");
-		response.sendRedirect("login.jsp");
+		response.sendRedirect("view.jsp");
 	}
 	
 	
@@ -199,9 +199,9 @@ input{
                     <!--  li><a href="#">둘러보기</a></nav>-->
                 </ul>
                 <ul class="h_menubar">
-                    <li><a href="">파티 만들기</a></li>
-                    <li><a href="#">파티 검색</a></li>
-                    <li><a href="#">파티 기록</a></li>
+                    <li><a href="CreatePartys.jsp">파티 만들기</a></li>
+                    <li><a href="SearchPartys.jsp">파티 찾기</a></li>
+                    <li><a href="#">파티 관리</a></li>
                     <!-- li><a href="#">About us</a></li-->
                 </ul>
                 <ul class="h_menu">

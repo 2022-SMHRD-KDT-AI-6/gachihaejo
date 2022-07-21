@@ -23,7 +23,7 @@ public class LogoutService extends HttpServlet {
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter writer = response.getWriter();
 
-		writer.print("<script>alert('로그아웃');location.href='http://localhost:8082/project1/view.jsp'</script>");
+		writer.print("<script>alert('로그아웃');location.href='http://localhost:8081/project1/view.jsp'</script>");
 		writer.close();
 	}
 
