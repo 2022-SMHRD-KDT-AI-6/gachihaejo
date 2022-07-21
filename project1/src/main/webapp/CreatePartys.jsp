@@ -1,3 +1,4 @@
+<%@page import="Model.LoginDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -8,6 +9,11 @@
 	// /test1 : 폴더이름 ( webapp이 어디 있는지)
 	String cpath = request.getContextPath();
 	// 파티만들기 페이지입니다.
+%>
+<%
+	LoginDTO user = (LoginDTO)session.getAttribute("user");
+	String user_id = user.getId();
+	String user_nick = user.getNick();
 %>
 <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -75,13 +81,13 @@
                 </ul>
                 <ul class="h_menubar">
                    <li><a href="./CreatePartys.jsp" class="menu">파티 만들기</a></li>
-                   <li><a href="./SearchPartys.jsp" class="menu">파티 검색</a></li>
-                   <li><a href="#" class="menu">파티 기록</a></li>
-                   <li><a href="#" class="menu">About us</a></li>
+                   <li><a href="./SearchPartys.jsp" class="menu">파티 찾기</a></li>
+                   <li><a href="HistoyParty/index.jsp" class="menu">파티 관리</a></li>
+                   <li><a href="./Main.jsp" class="menu">마이페이지</a></li>
                 </ul>
                   <ul class="h_menu">
-                   <li><a href="login.jsp">login</a></li>
-                   <li><a href="Main.jsp">mypage</a></li>
+                  	<li><%= user_nick %>님 안녕하세요</li>
+                   <li><a href="LogoutService">logout</a></li>
                 </ul>
             </div>
         </header>
@@ -145,7 +151,8 @@
 	              			</td>
 	              			<td>
 	              			<span style = "padding-left: 30px;">
-	              			<strong>각화동각잡이</strong>
+	              			
+	              			<strong><%=user_nick%></strong>
 	              			</span>
 	              			</td>
 	              		</table>

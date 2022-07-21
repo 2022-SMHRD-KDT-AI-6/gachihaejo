@@ -1,3 +1,4 @@
+<%@page import="Model.LoginDTO"%>
 <%@page import="Model.history_SP_niceDTO"%>
 <%@page import="Model.history_CP_niceDTO"%>
 <%@page import="java.util.ArrayList"%>
@@ -51,7 +52,10 @@
 			// 로그인 한 사람이 파티 기록을 누르면 세가지 버튼이 있어야함.
 			// 1.만든파티 2.신청한 파티 3.이전 파티기록 
 			// 각 버튼 클릭시 해당 테이블 생성
-			String user_id = "rjsdn8842";
+		LoginDTO user = (LoginDTO)session.getAttribute("user");
+		String user_id = user.getId();
+		String user_nick = user.getNick();
+
 		 	ArrayList<history_CP_niceDTO> list = dao.CP_select(user_id);
 		 	ArrayList<history_SP_niceDTO> sp_list = sp_dao.SP_select(user_id);
 		 	
@@ -64,13 +68,13 @@
                     <li><a href="../view.jsp" class="logo"></a></li>
                 </ul>
                 <ul class="h_menubar">
-                    <li><a href="CreatePartys.jsp">파티 만들기</a></li>
-                    <li><a href="SearchPartys.jsp">파티 찾기</a></li>
-                    <li><a href="#">파티 관리</a></li>
+                    <li><a href="../CreatePartys.jsp">파티 만들기</a></li>
+                    <li><a href="../SearchPartys.jsp">파티 찾기</a></li>
+                    <li><a href="../Main.jsp">마이페이지</a></li>
                 </ul>
                 <ul class="h_menu">
-                    <li>로그인한 사람ID님 안녕하세요</li>
-                    <li><a href="#">logout</a></li>
+                    <li><%=user_nick%>님 안녕하세요</li>
+                    <li><a href="../LogoutService">logout</a></li>
                 </ul>
             </div>
     </header>

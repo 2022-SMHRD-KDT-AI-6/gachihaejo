@@ -1,3 +1,4 @@
+<%@page import="Model.LoginDTO"%>
 <%@page import="java.util.Scanner"%>
 <%@page import="Model.SearchPartyDTO"%>
 <%@page import="java.util.ArrayList"%>
@@ -7,6 +8,9 @@
 <%
 String cpath = request.getContextPath();
 // 파티찾기 페이지입니다.
+LoginDTO user = (LoginDTO)session.getAttribute("user");
+String user_id = user.getId();
+String user_nick = user.getNick();
 %>
 <!DOCTYPE html>
 <html>
@@ -14,6 +18,7 @@ String cpath = request.getContextPath();
 <meta charset="utf-8">
 <title>같이해조 || 파티 참석</title>
 <link rel="stylesheet" href="<%=cpath%>/SearchParty/SearchParty.css">
+<link rel="stylesheet" href="<%=cpath %>/CreateParty/CreateParty.css" rel="stylesheet">
 <!-- 시군구 select -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -158,7 +163,7 @@ ArrayList<SearchPartyDTO> list = (ArrayList<SearchPartyDTO>) request.getAttribut
 
 <body>
 	<input type="hidden" id="party_seq" name="party_seq">
-	<input type="hidden" id="user_id" name="user_id" value="상발잉">
+	<input type="hidden" id="user_id" name="user_id" value=<%=user_id %>>
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9343c1068f34ec9bc4c98062686ea903&libraries=services"></script>
 	<header id="header">
@@ -168,13 +173,13 @@ ArrayList<SearchPartyDTO> list = (ArrayList<SearchPartyDTO>) request.getAttribut
 			</ul>
 			<ul class="h_menubar">
 				<li><a href="./CreatePartys.jsp" class="menu">파티 만들기</a></li>
-				<li><a href="./SearchPartys.jsp" class="menu">파티 검색</a></li>
-				<li><a href="#" class="menu">파티 기록</a></li>
-				<li><a href="#" class="menu">About us</a></li>
+				<li><a href="./SearchPartys.jsp" class="menu">파티 찾기</a></li>
+				<li><a href="HistoyParty/index.jsp" class="menu">파티 관리</a></li>
+				<li><a href="Main.jsp" class="menu">마이페이지</a></li>
 			</ul>
 			<ul class="h_menu">
-				<li><a href="login.jsp">login</a></li>
-				<li><a href="Main.jsp">mypage</a></li>
+				<li><%= user_nick %>님 안녕하세요</li>
+				<li><a href="LogoutService">logout</a></li>
 			</ul>
 		</div>
 	</header>
@@ -211,7 +216,7 @@ ArrayList<SearchPartyDTO> list = (ArrayList<SearchPartyDTO>) request.getAttribut
 					<span class="sub_heading"> 함께하고 싶은 파티를 찾아 보아요 </span>
 					
 							<div style="float: left;">
-								<h2 class="heading">파티 참가하기</h2>
+								<h2 class="heading">파티 찾기</h2>
 							</div>
 							<div>
 						<form action="SearchPartyService">
@@ -222,11 +227,28 @@ ArrayList<SearchPartyDTO> list = (ArrayList<SearchPartyDTO>) request.getAttribut
 									name="addressDo" id="addressDo1"></select> <select
 									name="addressSiGunGu" id="addressSiGunGu1"></select>
 							</div>
+							
 							</form>
+							<table>
+	              			<tr>
+	              			<td colspan = "2">
+	              			<div>
+	              			<img class = "imgstyle" src = "https://biz.chosun.com/resizer/ciImV120M1XQh3TqFWPPIbuqMH8=/464x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosunbiz/HHKQ3EUV4FPJG3EI7SZ5UPWNSI.jpg">
+	              			</div>
+	              			</td>
+	              			<td>
+	              			<span style = "padding-left: 30px;">
+	              		
+	              			<strong><%=user_nick%></strong>
+	              			</span>
+	              			</td>
+	              		</table>
 					</div>
+					
 					
 					<div class="one_filter">Filters</div>
 				</div>
+				
 				<div class="stays_list">
 					<ul id="placesList">
 

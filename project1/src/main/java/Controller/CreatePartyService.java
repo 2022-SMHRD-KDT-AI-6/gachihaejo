@@ -8,14 +8,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import Model.CreatePartyDAO;
 import Model.CreatePartyDTO;
+import Model.LoginDTO;
 
 @WebServlet("/CreatePartyService")
 public class CreatePartyService extends HttpServlet {
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		HttpSession session = request.getSession();
+		LoginDTO user = (LoginDTO)session.getAttribute("user");
+		
 		String title = request.getParameter("title");
 		String type = request.getParameter("hobby");
 		String content = request.getParameter("text");
@@ -26,7 +32,7 @@ public class CreatePartyService extends HttpServlet {
 		Double lat = Double.parseDouble(request.getParameter("lat"));
 		Double lon = Double.parseDouble(request.getParameter("lon"));
 		String end_date_time = end_date + " " + end_time;
-		
+		String user_id = user.getId();
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter writer = response.getWriter();
 		
@@ -40,18 +46,18 @@ public class CreatePartyService extends HttpServlet {
 		System.out.println(lon);
 
 		CreatePartyDAO dao = new CreatePartyDAO();
-		CreatePartyDTO dto = new CreatePartyDTO(title, type, content, addr, max_cnt, end_date_time, "rjsdn8842", lat, lon);
+		CreatePartyDTO dto = new CreatePartyDTO(title, type, content, addr, max_cnt, end_date_time, user_id, lat, lon);
 		
 		int row = dao.insert(dto);
 		
 		if(row != 1) {
 			System.out.println("파티생성 실패");
-			writer.print("<script>alert('파티생성 실패');location.href='http://localhost:8081/test1/Home.jsp'</script>");
+			writer.print("<script>alert('파티생성 실패');location.href='http://localhost:8081/project1/CreatePartys.jsp'</script>");
 			writer.close();
 			
 		}else {
 			System.out.println("파티생성 성공");
-			writer.print("<script>alert('파티생성 성공');location.href='http://localhost:8081/test1/Home.jsp'</script>");
+			writer.print("<script>alert('파티생성 성공');location.href='http://localhost:8081/project1/CreatePartys.jsp'</script>");
 			writer.close();
 		}
 		// response.sendRedirect("./Home.jsp");
