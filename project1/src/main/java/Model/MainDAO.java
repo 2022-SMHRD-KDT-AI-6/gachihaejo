@@ -44,7 +44,49 @@ public class MainDAO {
 	
 	
 	// 만들어져있는 파티 조회
-	public ArrayList<MainDTO> select() {
+	public ArrayList<MainDTO> select(String city) {
+			ArrayList<MainDTO> list = new ArrayList<>();
+			
+			getConn();
+			
+			try {
+				
+				String sql = "select * from tbl_party where party_addr like ?";
+				
+				psmt = conn.prepareStatement(sql);
+			
+				psmt.setString(1, city+"%");
+				
+				rs = psmt.executeQuery();
+				
+				
+				
+				while (rs.next()) {
+					MainDTO dto = new MainDTO();
+					
+					dto.setParty_seq(rs.getInt("party_seq"));
+					dto.setParty_title(rs.getString("party_title"));
+					dto.setParty_type(rs.getString("party_type"));
+					dto.setParty_content(rs.getString("party_content"));
+					dto.setParty_addr(rs.getString("party_addr"));
+					dto.setParty_max_cnt(rs.getInt("party_max_cnt"));
+					dto.setParty_end_date(rs.getString("party_end_date"));
+					dto.setReg_date(rs.getString("reg_date"));
+					dto.setUser_id(rs.getString("user_id"));
+					dto.setParty_latitude(rs.getDouble("party_latitude"));
+					dto.setParty_longitude(rs.getDouble("party_longitude"));
+					list.add(dto);
+				}
+			} catch (Exception e) {
+			e.printStackTrace();
+			} finally {
+				close();
+			}
+			return list;
+			
+		}
+	
+		public ArrayList<MainDTO> selectAll() {
 			ArrayList<MainDTO> list = new ArrayList<>();
 			
 			getConn();

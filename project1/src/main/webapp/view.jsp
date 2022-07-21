@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>document</title>
     <link rel="stylesheet" href="view.css">
-    <link rel="stylesheet" href="/common.css">
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
@@ -35,8 +35,13 @@
 <body>
 
 <%
+	ArrayList<MainDTO> list = (ArrayList<MainDTO>)request.getAttribute("list");
+	
 	MainDAO dao = new MainDAO();
-	ArrayList<MainDTO> list = dao.select();
+	if(list == null)
+	{
+		list = dao.selectAll();
+	}
 	
 %> 
     <header class="header">
@@ -45,11 +50,29 @@
                 <a href="" class="logo"></a>
                 <div class="search-sticky">
                     <!-- DB 검색하기 (미완성)-->
-                    <button class="search-sticky-btn" href="#">
-                        <span>검색 시작하기</span>
-                        <i class="fas fa-search search-sticky-img"></i>
-                    </button>
+                    <div class="search-sticky-btn">
+                       <div class="search-minimenu" onclick="location.href='CreatePartys.jsp'">
+                    <label  for="location">파티 만들기</label>
+                    <!-- <input id="location" type="text"> -->
                 </div>
+                <div  class="search-minimenu" onclick="location.href='SearchPartys.jsp'">
+                    <label for="checkin">파티 찾기</label>
+                    <!-- <input id="checkin" type="date" > -->
+                </div>
+               
+                <div class="search-minimenu">
+                    <label for="checkout">파티 관리</label>
+                    <!-- <input id="checkout" type="text"> -->
+                </div>
+               
+                <div class="search-minimenu" onclick="location.href='Main.jsp'">
+                    <label for="number">마이페이지</label>
+                   <!--  <input id="number" type="text"> -->
+                        <!-- <i class="fas fa-search search-sticky-img"></i> -->
+                    </div>
+                    </div>
+                </div>
+              
                 <ul class="my">
                     <li><a href=""></a></li>
 
@@ -82,6 +105,13 @@
                     <label for="number">마이페이지</label>
                    <!--  <input id="number" type="text"> -->
                 </div>
+                
+                
+                
+                
+                
+                
+                
               <!--   <div class="search-btn">
                     <i class="fas fa-search"></i>
                 </div> -->
@@ -103,10 +133,11 @@
 %>
     <section class="main main-img">
     	<%if(login){%>
-    		<p class="main-txt"><%=dto.getId()%>님 환영합니다.<br>혼자 취미생활을 즐기기 힘들때! 저희가 도와드립니다.</p>
+    		<p class="main-txt"><%=dto.getId()%> 님 환영합니다.<br>혼자 취미생활을 즐기기 힘들때! 저희가 도와드립니다.</p>
     	<%}else{%>
         <p class="main-txt">혼자 취미생활을 즐기기 힘들때! 저희가 도와드립니다.</p>
         <%} %>
+        
         <%if(login){%>
          <a onclick="location.href='LogoutService'" class="main-search" data-toggle="modal">
 			<span class="main-search-txt">로그아웃</span>
@@ -174,7 +205,8 @@
     <section class="spot section">
         <h2 class="sub-title">원하는 지역에서, 찾아보세요</h2>
         
-        <div class="spot-item" onclick="changmenu()">
+        	
+        <a class="spot-item" href = "CityService?city=서울">
                 <span class="spot-inner">
                     <img src="image/spot7.jpg" class="spot-img" alt="">
                     <span class="spot-txt">
@@ -182,8 +214,10 @@
                         <span class="spot-distance"></span>
                     </span>
                 </span>
-        </div>
-        <div class="spot-item">
+        </a>
+                
+        
+        <a href="#" class="spot-item">
                 <span class="spot-inner">
                     <img src="image/spot3.jpg" class="spot-img" alt="">
                     <span class="spot-txt">
@@ -191,9 +225,9 @@
                         <span class="spot-distance"></span>
                     </span>
                 </span>
-        </div>
+        </a>
             
-            <div class="spot-item">
+            <a class="spot-item" href = "CityService?city=부산">
                 <span class="spot-inner">
                     <img src="image/spot4.png" class="spot-img" alt="">
                     <span class="spot-txt">
@@ -201,7 +235,7 @@
                         <span class="spot-distance"></span>
                     </span>
                 </span>
-            </div>
+            </a>
             <div  class="spot-item">
                 <span class="spot-inner">
                     <img src="image/spot8.png" class="spot-img" alt="">
@@ -220,7 +254,7 @@
                     </span>
                 </span>
             </div>
-            <div class="spot-item">
+            <a class="spot-item" href = "CityService?city=광주">
                 <span class="spot-inner">
                     <img src="image/spot6.png" class="spot-img" alt="">
                     <span class="spot-txt">
@@ -228,7 +262,7 @@
                         <span class="spot-distance"></span>
                     </span>
                 </span>
-            </div>
+            </a>
             <div class="spot-item">
                 <span class="spot-inner">
                     <img src="image/spot.jpg" class="spot-img" alt="">
@@ -274,7 +308,7 @@
                     <div class="hobby-item">
                     
                     <% 
-                    	String[] cateList = {"sports", "game", "cooking", "music"};
+                    	String[] cateList = {"sports", "game", "cooking", "music", "art", "movie", "pet", "health", "craft", "improve", "travle"};
                     	String[] imgName = new String[list.size()];
                     	
                     	for(int j = 0; j < list.size(); j++){
@@ -333,28 +367,56 @@
 
 
         <section class="hobbyteam section">
-            <h2 class="sub-title"> <strong>곧!</strong>마감되는 파티! 서두르세요</h2>
+            <h2 class="sub-title"> <strong>곧 </strong>마감되는 파티! 서두르세요</h2>
                <div class="hotmainview">
             <div class="hotswiper">
               <div class="swiper-wrapper">
 
 	
+
 				<% for(int i =0; i<list.size(); i++){%>
                 <div class="swiper-slide">
                     <div id="PartyRecruitList">
                     <div class="hobby-item">
                     
+                    <% 
+                    	String[] cateList = {"sports", "game", "cooking", "music", "art", "movie", "pet", "craft", "improve", "travle"};
+                    	String[] imgName = new String[list.size()];
+                    	
+                    	for(int j = 0; j < list.size(); j++){
+                    		System.out.println("***********************************************");
+                    		for(int k = 0; k < cateList.length; k++){
+                    			if(list.get(j).getParty_type().equals( cateList[k]) ){
+                        			imgName[j] =  cateList[k] + ".png";
+                        			break;
+                        		}
+                    			else{
+                    				
+                    				System.out.println("리스트 카테고리 이름 = " + list.get(j).getParty_type());
+                    				System.out.println("카테리스트 이름 = " + cateList[k]);
+                    			}
+                    		}
+                    	}
+                    %>
+                    
+                    	
                         <div class="mainview-img" ></div>
-                            <img src="image/Testimg/be_happy.png" class="mainview-img"> 
+                            <img src="image/Testimg/<%=imgName[i]%>" class="mainview-img"> 
                             <div class="pro_text">
-                        <ul>
+                            <ul>
                                 <li>
                                 <%int people = dao.cnt_people(list.get(i).getParty_seq()); %>
+                                
                                 <%if(people >= list.get(i).getParty_max_cnt()){ %>
+                                
                                     <span class="hobby_text_end">마감</span>
+                                
                                 <%}else{%>
-                                	<span class="hobby_text_ing">모집중 <%=people%> / <%= list.get(i).getParty_max_cnt() %></span>                            	
+                                
+                              <span class="hobby_text_ing"> 모집중 <%=people%> / <%= list.get(i).getParty_max_cnt() %></span>                            	
+                                
                                 <%}%>
+                                
                                 </li>
                             <li>
                             <span class="sub-txt"> <%=list.get(i).getParty_title()%></span>
@@ -370,7 +432,6 @@
                     </div>
                 </div>
                 <%} %>
-
             
             </div>
         </div>
@@ -405,8 +466,8 @@
             <ul>
                 <li>스마트인재개발원</li>
                 <li>광주광역시 남구 송하동 373-3</li>
-                <li>전화 : 062-000-0000</li>
-                <li>FAX : 0502-000-0000</li>
+                <li>전화 : 062-655-3506, 9</li>
+                <li>FAX : 062-655-3510</li>
                 
             </ul>
             <ul>
