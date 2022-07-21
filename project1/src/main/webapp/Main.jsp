@@ -172,6 +172,12 @@ input{
                 rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
                 rgba(0, 0, 0, 0) 0px 0px 0px 0px;
 }
+
+.profile-img>div{
+	line-height:0.6
+}
+
+
 </style>
 
 
@@ -182,13 +188,12 @@ input{
 <%
 	
 	LoginDTO dto = (LoginDTO)session.getAttribute("user");
-	response.setContentType("text/html; charset=utf-8");
-	PrintWriter writer = response.getWriter();
+    response.setContentType("text/html; charset=utf-8");
+    PrintWriter writer = response.getWriter();
 	
 	if(dto == null){
 		writer.print("<script>alert('아이디 비밀번호를 입력해주세요');location.href='http://localhost:8081/project1/view.jsp'</script>");
 		writer.close();
-
 	}
 	
 	
@@ -227,6 +232,9 @@ input{
                                 사진 바꾸기
                                 <input type="file" name = "file" id="input-image">
                                 <input type="text" name="file2" style="display: none;" value="<%= dto.getPhoto() %>">
+                            </div>
+                            <div class="file btn btn-lg btn-primary">
+                            <span onclick="test()">제거</span>
                             </div>
                         </div>
                     </div>
@@ -387,4 +395,6 @@ input{
                             inputImage.addEventListener("change", e => {
                                 readImage(e.target)
                             })
+                            
+	
 </script>
