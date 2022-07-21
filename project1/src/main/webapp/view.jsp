@@ -209,19 +209,20 @@
         <a class="spot-item" href = "CityService?city=서울">
                 <span class="spot-inner">
                     <img src="image/spot7.jpg" class="spot-img" alt="">
-                    <span class="spot-txt">
                         <span class="spot-name">서울</span>
+                    <span class="spot-txt">
                         <span class="spot-distance"></span>
                     </span>
                 </span>
+                
         </a>
                 
         
         <a href="#" class="spot-item">
                 <span class="spot-inner">
                     <img src="image/spot3.jpg" class="spot-img" alt="">
-                    <span class="spot-txt">
                         <span class="spot-name">경기</span>
+                    <span class="spot-txt">
                         <span class="spot-distance"></span>
                     </span>
                 </span>
@@ -230,8 +231,8 @@
             <a class="spot-item" href = "CityService?city=부산">
                 <span class="spot-inner">
                     <img src="image/spot4.png" class="spot-img" alt="">
-                    <span class="spot-txt">
                         <span class="spot-name">부산</span>
+                    <span class="spot-txt">
                         <span class="spot-distance"></span>
                     </span>
                 </span>
@@ -239,8 +240,8 @@
             <div  class="spot-item">
                 <span class="spot-inner">
                     <img src="image/spot8.png" class="spot-img" alt="">
-                                        <span class="spot-txt">
                         <span class="spot-name">대구</span>
+                                        <span class="spot-txt">
                         <span class="spot-distance"></span>
                     </span>
                 </span>
@@ -248,8 +249,8 @@
             <div class="spot-item">
                 <span class="spot-inner">
                     <img src="image/spot5.jpg" class="spot-img" alt="">
-                    <span class="spot-txt">
                         <span class="spot-name">인천</span>
+                    <span class="spot-txt">
                         <span class="spot-distance"></span>
                     </span>
                 </span>
@@ -257,8 +258,8 @@
             <a class="spot-item" href = "CityService?city=광주">
                 <span class="spot-inner">
                     <img src="image/spot6.png" class="spot-img" alt="">
-                    <span class="spot-txt">
                         <span class="spot-name">광주</span>
+                    <span class="spot-txt">
                         <span class="spot-distance"></span>
                     </span>
                 </span>
@@ -266,8 +267,8 @@
             <div class="spot-item">
                 <span class="spot-inner">
                     <img src="image/spot.jpg" class="spot-img" alt="">
-                    <span class="spot-txt">
                         <span class="spot-name">울산</span>
+                    <span class="spot-txt">
                         <span class="spot-distance"></span>
                     </span>
                 </span>
@@ -275,8 +276,8 @@
             <div class="spot-item">
                 <span class="spot-inner">
                     <img src="image/spot2.png" class="spot-img" alt="">
-                    <span class="spot-txt">
                         <span class="spot-name">제주</span>
+                    <span class="spot-txt">
                         <span class="spot-distance"></span>
                     </span>
                 </span>
@@ -312,17 +313,12 @@
                     	String[] imgName = new String[list.size()];
                     	
                     	for(int j = 0; j < list.size(); j++){
-                    		System.out.println("***********************************************");
+                    	
                     		for(int k = 0; k < cateList.length; k++){
                     			if(list.get(j).getParty_type().equals( cateList[k]) ){
                         			imgName[j] =  cateList[k] + ".png";
                         			break;
-                        		}
-                    			else{
-                    				
-                    				System.out.println("리스트 카테고리 이름 = " + list.get(j).getParty_type());
-                    				System.out.println("카테리스트 이름 = " + cateList[k]);
-                    			}
+                        		}                    			
                     		}
                     	}
                     %>
@@ -384,17 +380,13 @@
                     	String[] imgName = new String[list.size()];
                     	
                     	for(int j = 0; j < list.size(); j++){
-                    		System.out.println("***********************************************");
+                    		
                     		for(int k = 0; k < cateList.length; k++){
                     			if(list.get(j).getParty_type().equals( cateList[k]) ){
                         			imgName[j] =  cateList[k] + ".png";
                         			break;
                         		}
-                    			else{
-                    				
-                    				System.out.println("리스트 카테고리 이름 = " + list.get(j).getParty_type());
-                    				System.out.println("카테리스트 이름 = " + cateList[k]);
-                    			}
+                    			
                     		}
                     	}
                     %>
