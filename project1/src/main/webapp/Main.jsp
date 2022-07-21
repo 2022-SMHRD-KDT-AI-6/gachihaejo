@@ -231,7 +231,7 @@ input{
                             <div class="file btn btn-lg btn-primary">
                                 사진 바꾸기
                                 <input type="file" name = "file" id="input-image">
-                                <input type="text" name="file2" style="display: none;" value="<%= dto.getPhoto() %>">
+                                <input type="text" name="file2" style="display: none;" value="<%= dto.getPhoto() %>" id="input-image2">
                             </div>
                             <div class="file btn btn-lg btn-primary">
                             <span onclick="test()">제거</span>
@@ -396,5 +396,15 @@ input{
                                 readImage(e.target)
                             })
                             
+	function test() {
+		// $("#preview-image").attr("src","url(image/기본이미지.jpg)");
+		
+		const img = document.getElementById("preview-image");
+		img.setAttribute('src','image/기본이미지.jpg');
+		
+		let img2 = document.getElementById("input-image2");
+		img2.value="기본이미지.jpg";
+		
 	
+	}
 </script>
