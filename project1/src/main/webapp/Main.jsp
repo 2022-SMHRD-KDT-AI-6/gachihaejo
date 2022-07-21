@@ -1,3 +1,4 @@
+<%@page import="java.io.PrintWriter"%>
 <%@page import="Model.LoginDTO"%>
 <%@page import="Model.MemberupDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -181,11 +182,13 @@ input{
 <%
 	
 	LoginDTO dto = (LoginDTO)session.getAttribute("user");
-	
+	response.setContentType("text/html; charset=utf-8");
+	PrintWriter writer = response.getWriter();
 	
 	if(dto == null){
-		System.out.println("test");
-		response.sendRedirect("view.jsp");
+		writer.print("<script>alert('아이디 비밀번호를 입력해주세요');location.href='http://localhost:8081/project1/view.jsp'</script>");
+		writer.close();
+
 	}
 	
 	
