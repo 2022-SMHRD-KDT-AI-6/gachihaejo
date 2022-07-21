@@ -403,7 +403,7 @@
                         <div class="mainview-img" ></div>
                             <img src="image/Testimg/<%=imgName[i]%>" class="mainview-img"> 
                             <div class="pro_text">
-                        <ul>
+                            <ul>
                                 <li>
                                 <%int people = dao.cnt_people(list.get(i).getParty_seq()); %>
                                 
