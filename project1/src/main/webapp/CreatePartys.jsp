@@ -7,6 +7,7 @@
 	// http://localhost:8081/test1/SearchPartyService
 	// /test1 : 폴더이름 ( webapp이 어디 있는지)
 	String cpath = request.getContextPath();
+	// 파티만들기 페이지입니다.
 %>
 <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -41,11 +42,12 @@
 		.h_random li {display: inline-block; margin: 20px 0 0 20px;  }
 		.h_random li a {font-size: 18px; color: black; font-weight: 500; transition: 0.2s;}
 		.h_random li a:hover {color: #5865F2;}
+		
 		.logo {
 		    display: inline-block;
 		    width: 150px;
 		    height: 50px;
-		    background: url(./img/logo.png) no-repeat;
+		    background: url(./image/Testimg/welogo.png) no-repeat;
 		    background-size: contain;
 		}
 		.h_menubar {margin: 25px 0;}
@@ -58,6 +60,10 @@
 		.h_menu li a:hover {color: #5865F2;}
 		
 		.h_cont {display: flex; justify-content: space-around; padding-left: 150px; padding-top:0; border-bottom: black solid 1.5px }
+		
+		a.menu{
+			width: auto;
+		}
     </style>
     
 </head>
@@ -68,10 +74,10 @@
                     <li><a href="view.jsp" class="logo"></a></li>
                 </ul>
                 <ul class="h_menubar">
-                   <li><a href="CreatePartys.jsp">파티 만ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴ들기</a></li>
-                   <li><a href="#">파티 검색</a></li>
-                   <li><a href="#">파티 기록</a></li>
-                   <li><a href="#">About us</a></li>
+                   <li><a href="./CreatePartys.jsp" class="menu">파티 만들기</a></li>
+                   <li><a href="./SearchPartys.jsp" class="menu">파티 검색</a></li>
+                   <li><a href="#" class="menu">파티 기록</a></li>
+                   <li><a href="#" class="menu">About us</a></li>
                 </ul>
                   <ul class="h_menu">
                    <li><a href="login.jsp">login</a></li>
@@ -231,7 +237,7 @@
             </div>
 	
         </div>
-        <div id="map" style="width:1000px; height:1000px; float: right;"></div>
+        <div id="map" style="width:1000px; height:840px; float: right;"></div>
     </div>
     
     <div class="main">

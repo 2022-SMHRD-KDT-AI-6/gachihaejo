@@ -6,6 +6,7 @@
 	pageEncoding="UTF-8"%>
 <%
 String cpath = request.getContextPath();
+// 파티찾기 페이지입니다.
 %>
 <!DOCTYPE html>
 <html>
@@ -25,7 +26,7 @@ String cpath = request.getContextPath();
 <title>Stays in Fethiye</title>
 <style>
 .input2 input[type="text"] {
-	width: 300px;
+	width: 250px;
 	height: 48px;
 	border: 1px solid #dddddd;
 	border-radius: 40px;
@@ -35,6 +36,10 @@ String cpath = request.getContextPath();
 	font-weight: 600;
 	font-size: 14px;
 }
+
+a.menu{
+			width: auto;
+		}
 
 .stays {
 	margin-top: 0%;
@@ -84,7 +89,7 @@ a {
 	display: inline-block;
 	width: 150px;
 	height: 50px;
-	background: url(./img/logo.png) no-repeat;
+	background: url(./image/Testimg/welogo.png) no-repeat;
 	background-size: contain;
 }
 
@@ -137,9 +142,13 @@ a {
 }
 
 #header {
+ position: fixed;
+  left: 0;
+  right: 0;
 	text-align: center;
 	width: 100%;
 	border-bottom: 1.5px solid #ECF0EE;
+	
 }
 </style>
 <%
@@ -152,16 +161,16 @@ ArrayList<SearchPartyDTO> list = (ArrayList<SearchPartyDTO>) request.getAttribut
 	<input type="hidden" id="user_id" name="user_id" value="상발잉">
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9343c1068f34ec9bc4c98062686ea903&libraries=services"></script>
-	<header id="header" class="menu_other">
-		<div class="h_cont">
+	<header id="header">
+		<div class="h_cont" style = "background-color : white">
 			<ul class="h_random">
 				<li><a href="view.jsp" class="logo"></a></li>
 			</ul>
 			<ul class="h_menubar">
-				<li><a href="">파티 만들기</a></li>
-				<li><a href="#">파티 검색</a></li>
-				<li><a href="#">파티 기록</a></li>
-				<li><a href="#">About us</a></li>
+				<li><a href="./CreatePartys.jsp" class="menu">파티 만들기</a></li>
+				<li><a href="./SearchPartys.jsp" class="menu">파티 검색</a></li>
+				<li><a href="#" class="menu">파티 기록</a></li>
+				<li><a href="#" class="menu">About us</a></li>
 			</ul>
 			<ul class="h_menu">
 				<li><a href="login.jsp">login</a></li>
@@ -197,24 +206,25 @@ ArrayList<SearchPartyDTO> list = (ArrayList<SearchPartyDTO>) request.getAttribut
 
 	<div class="stays">
 		<div class="container">
-			<div class="left" style="margin-top: 200px;">
+			<div class="left" style="margin-top: 100px; height: 500px">
 				<div class="stays_header">
 					<span class="sub_heading"> 함께하고 싶은 파티를 찾아 보아요 </span>
-					<div>
+					
+							<div style="float: left;">
+								<h2 class="heading">파티 참가하기</h2>
+							</div>
+							<div>
 						<form action="SearchPartyService">
 							<div class="input2" style="margin-left: 530px;">
 								<input type="text" id="keyword" size="15" name="hobby">
-								<button type="submit">검색</button>
-
+								<button type="submit">취미검색</button>
 								<select name="addressRegion" id="addressRegion1"></select> <select
 									name="addressDo" id="addressDo1"></select> <select
 									name="addressSiGunGu" id="addressSiGunGu1"></select>
 							</div>
-							<div style="float: left;">
-								<h2 class="heading">파티 참가하기</h2>
-							</div>
+							</form>
 					</div>
-					</form>
+					
 					<div class="one_filter">Filters</div>
 				</div>
 				<div class="stays_list">
@@ -225,7 +235,7 @@ ArrayList<SearchPartyDTO> list = (ArrayList<SearchPartyDTO>) request.getAttribut
 				<div></div>
 			</div>
 			<div class="right" id="map"
-				style="width: 1000px; height: 1000px; float: right;"></div>
+				style="width: 1000px; height: 1000px;"></div>
 		</div>
 	</div>
 	<div class="main">
@@ -460,6 +470,7 @@ ArrayList<SearchPartyDTO> list = (ArrayList<SearchPartyDTO>) request.getAttribut
 			success : function(result){
 				if(parseInt(result) > 0){
 					alert("파티신청 완료!");
+					location.reload();
 				}else{
 					alert("이미 신청한 파티입니다!");	
 				}
