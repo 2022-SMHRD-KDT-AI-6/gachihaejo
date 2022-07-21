@@ -60,8 +60,8 @@
 
 	<header id="header">
             <div class="h_cont">
-                <ul class="h_random">
-                    <li><a href="view.jsp" class="logo"></a></li>
+                <ul style = list-style:none; class="h_random">
+                    <li><a href="../view.jsp" class="logo"></a></li>
                 </ul>
                 <ul class="h_menubar">
                     <li><a href="CreatePartys.jsp">파티 만들기</a></li>
@@ -79,9 +79,9 @@
 			<div class="row justify-content-center">
 				<div class="col-md-6 text-center mb-5">
 					<h2 class="heading-section">
-					<button id="history_CP">만든 파티</button>
-					<button id="history_SP">신청한 파티</button>
-					<button id="history">이전 파티 기록</button></h2>
+					<button class = 'btn btn-outline-primary' id="history_CP">만든 파티</button>
+					<button class = 'btn btn-outline-primary' id="history_SP">신청한 파티</button>
+					<button class = 'btn btn-outline-primary' id="history">이전 파티 기록</button></h2>
 				</div>
 			</div>
 			
