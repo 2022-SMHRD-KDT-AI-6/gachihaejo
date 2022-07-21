@@ -97,7 +97,7 @@
                     <label for="checkin">파티 찾기</label>
                     <!-- <input id="checkin" type="date" > -->
                 </div>
-                <div class="search-menu">
+                <div class="search-menu" onclick="location.href='HistoyParty/index.jsp'">
                     <label for="checkout">파티 관리</label>
                     <!-- <input id="checkout" type="text"> -->
                 </div>
