@@ -119,5 +119,38 @@ public class SearchPartyDAO {
 				}
 				return cnt;
 		}
-
+	
+	public String photo(String user_id) {
+		String photo = "";
+		
+		getCorn();
+		
+		int cnt = 0;
+		try {
+			
+				
+			String sql = "select user_photo from tbl_user where user_id = ?";
+			
+			
+			psmt = conn.prepareStatement(sql);
+					
+			psmt.setString(1, user_id);
+					
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				photo = rs.getString("user_photo");
+			}
+				
+			
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				close();
+			}
+			return photo;
+	}
+		
+		
 }
+

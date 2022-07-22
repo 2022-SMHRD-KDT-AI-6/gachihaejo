@@ -328,7 +328,6 @@ SearchPartyDAO dao = new SearchPartyDAO();
     		<%for (int i = 0; i < list.size(); i++) {%>
     			var i = <%=i%>
     			
-    			
     			var places = {
     					
     					
@@ -344,7 +343,9 @@ SearchPartyDAO dao = new SearchPartyDAO();
     					user_id : "<%=list.get(i).getUser_id()%>",
     					party_latitude : "<%=list.get(i).getParty_latitude()%>",
     					party_longitude : "<%=list.get(i).getParty_longitude()%>",
-    					cnt_people : <%=dao.cnt_people(list.get(i).getParty_seq())%>
+    					cnt_people : <%=dao.cnt_people(list.get(i).getParty_seq())%>,
+    					photo : "<%= dao.photo(list.get(i).getUser_id())%>"
+    					<%System.out.println("유저의 사진 = " + dao.photo(list.get(i).getUser_id()) );%>
     			};
     			
     			
@@ -440,7 +441,7 @@ SearchPartyDAO dao = new SearchPartyDAO();
 		
 	    itemStr = '<a>';
 	    itemStr +=        '<div class="stays_item">'
-	    itemStr+=        '<img src="img/house1.jpg" alt="" />'
+	    itemStr+=        '<img src="image/' + places.photo + '"alt=/>'
 	    itemStr+=       '<div class="details">'
 	    	itemStr+=          '<span class="house_heading"></span>'
 	    itemStr+=          '<h3>' + places.party_title + '</h3>'
