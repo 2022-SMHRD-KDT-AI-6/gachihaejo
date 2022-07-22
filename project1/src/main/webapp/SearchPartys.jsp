@@ -52,6 +52,7 @@ a.menu{
 
 ul {
 	list-style: none;
+	z-index:1;
 }
 
 li {
@@ -68,6 +69,7 @@ a {
 	padding-left: 150px;
 	padding-top: 0;
 	border-bottom: black solid 1.5px;
+	z-index:2;
 }
 
 .h_random {
@@ -167,7 +169,7 @@ SearchPartyDAO dao = new SearchPartyDAO();
 	<input type="hidden" id="user_id" name="user_id" value=<%=user_id %>>
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9343c1068f34ec9bc4c98062686ea903&libraries=services"></script>
-	<header id="header">
+	<header id="header" style = "z-index:10000;">
 		<div class="h_cont" style = "background-color : white">
 			<ul class="h_random">
 				<li><a href="view.jsp" class="logo"></a></li>
