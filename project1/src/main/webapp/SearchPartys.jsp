@@ -158,6 +158,7 @@ a {
 </style>
 <%
 ArrayList<SearchPartyDTO> list = (ArrayList<SearchPartyDTO>) request.getAttribute("list");
+SearchPartyDAO dao = new SearchPartyDAO();
 %>
 </head>
 
@@ -233,7 +234,7 @@ ArrayList<SearchPartyDTO> list = (ArrayList<SearchPartyDTO>) request.getAttribut
 	              			<tr>
 	              			<td colspan = "2">
 	              			<div>
-	              			<img class = "imgstyle" src = "https://biz.chosun.com/resizer/ciImV120M1XQh3TqFWPPIbuqMH8=/464x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosunbiz/HHKQ3EUV4FPJG3EI7SZ5UPWNSI.jpg">
+	              			<img class = "imgstyle" src="image/<%= user.getPhoto() %>">
 	              			</div>
 	              			</td>
 	              			<td>
@@ -327,7 +328,10 @@ ArrayList<SearchPartyDTO> list = (ArrayList<SearchPartyDTO>) request.getAttribut
     		<%for (int i = 0; i < list.size(); i++) {%>
     			var i = <%=i%>
     			
+    			
     			var places = {
+    					
+    					
     					
     					party_seq : <%=list.get(i).getParty_seq()%>,
     					party_title : "<%=list.get(i).getParty_title()%>",
@@ -340,6 +344,7 @@ ArrayList<SearchPartyDTO> list = (ArrayList<SearchPartyDTO>) request.getAttribut
     					user_id : "<%=list.get(i).getUser_id()%>",
     					party_latitude : "<%=list.get(i).getParty_latitude()%>",
     					party_longitude : "<%=list.get(i).getParty_longitude()%>",
+    					cnt_people : <%=dao.cnt_people(list.get(i).getParty_seq())%>
     			};
     			
     			
@@ -448,7 +453,7 @@ ArrayList<SearchPartyDTO> list = (ArrayList<SearchPartyDTO>) request.getAttribut
 	    itemStr+=      '</div>'
 	    itemStr+=       '<div>'
 	    itemStr+=           '<span> 약속 시간 : ' + places.party_end_date + '</span>'
-	    itemStr+=           '<span> 모집 인원 : ? / ' + places.party_max_cnt + ' 명</span>'
+	    itemStr+=           '<span> 모집 인원 :' + places.cnt_people + ' / ' + places.party_max_cnt + ' 명</span>'
 	    itemStr+=       '</div>'
 	    itemStr+=   '</div>'
 	    itemStr+=   '<div class="house_footer">'

@@ -90,4 +90,34 @@ public class SearchPartyDAO {
 		return list;
 		
 	}
+
+	public int cnt_people(int party_seq) {
+			
+		getCorn();
+			int cnt = 0;
+			try {
+				
+					
+				String sql = "select * from tbl_request_party where party_seq = ? and attendance_yn = 'Y' ";
+				
+				
+				psmt = conn.prepareStatement(sql);
+						
+				psmt.setInt(1, party_seq);
+						
+				rs = psmt.executeQuery();
+				
+				while (rs.next()) {
+					cnt++;
+				}
+					
+				
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					close();
+				}
+				return cnt;
+		}
+
 }

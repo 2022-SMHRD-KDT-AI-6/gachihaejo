@@ -146,7 +146,7 @@
 	              			<tr>
 	              			<td colspan = "2">
 	              			<div>
-	              			<img class = "imgstyle" src = "https://biz.chosun.com/resizer/ciImV120M1XQh3TqFWPPIbuqMH8=/464x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosunbiz/HHKQ3EUV4FPJG3EI7SZ5UPWNSI.jpg">
+	              			<img class = "imgstyle" src="image/<%= user.getPhoto() %>">
 	              			</div>
 	              			</td>
 	              			<td>
