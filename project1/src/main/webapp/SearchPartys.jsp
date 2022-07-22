@@ -456,7 +456,7 @@ SearchPartyDAO dao = new SearchPartyDAO();
 	    itemStr+=      '</div>'
 	    itemStr+=       '<div>'
 	    itemStr+=           '<span> 약속 시간 : ' + places.party_end_date + '</span>'
-	    itemStr+=           '<span> 모집 인원 :' + places.cnt_people + ' / ' + places.party_max_cnt + ' 명</span>'
+	    itemStr+=           '<span> 모집 인원 : ' + places.cnt_people + ' / ' + places.party_max_cnt + ' 명</span>'
 	    itemStr+=       '</div>'
 	    itemStr+=   '</div>'
 	    itemStr+=   '<div class="house_footer">'
