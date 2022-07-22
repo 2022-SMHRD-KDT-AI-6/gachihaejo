@@ -237,7 +237,7 @@
                     </span>
                 </span>
             </a>
-            <div  class="spot-item">
+            <a class="spot-item" href = "CityService?city=대구">
                 <span class="spot-inner">
                     <img src="image/spot8.png" class="spot-img" alt="">
                         <span class="spot-name">대구</span>
@@ -245,8 +245,8 @@
                         <span class="spot-distance"></span>
                     </span>
                 </span>
-            </div>
-            <div class="spot-item">
+            </a>
+            <a class="spot-item" href = "CityService?city=인천">
                 <span class="spot-inner">
                     <img src="image/spot5.jpg" class="spot-img" alt="">
                         <span class="spot-name">인천</span>
@@ -254,7 +254,7 @@
                         <span class="spot-distance"></span>
                     </span>
                 </span>
-            </div>
+            </a>
             <a class="spot-item" href = "CityService?city=광주">
                 <span class="spot-inner">
                     <img src="image/spot6.png" class="spot-img" alt="">
@@ -264,7 +264,7 @@
                     </span>
                 </span>
             </a>
-            <div class="spot-item">
+            <a class="spot-item" href = "CityService?city=울산">
                 <span class="spot-inner">
                     <img src="image/spot.jpg" class="spot-img" alt="">
                         <span class="spot-name">울산</span>
@@ -272,8 +272,8 @@
                         <span class="spot-distance"></span>
                     </span>
                 </span>
-            </div>
-            <div class="spot-item">
+            </a>
+            <a class="spot-item" href = "CityService?city=제주">
                 <span class="spot-inner">
                     <img src="image/spot2.png" class="spot-img" alt="">
                         <span class="spot-name">제주</span>
@@ -281,7 +281,7 @@
                         <span class="spot-distance"></span>
                     </span>
                 </span>
-            </div>
+            </a>
         </section>
 
 
