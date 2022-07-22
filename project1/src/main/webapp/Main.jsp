@@ -62,7 +62,8 @@ body{
     width: 100%;
     padding: 2%;
     font-weight: 600;
-    color: #6c757d;
+    color: #fff;
+    background: #5865F2;
     cursor: pointer;
 }
 .proile-rating{
