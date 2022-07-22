@@ -52,8 +52,8 @@ public class history_SP_niceDAO {
 		db_Corn();
 		try {
 
-			String sql = "select * from tbl_request_party where user_id = ?";
-
+			String sql = "select * from tbl_request_party where user_id = ? and party_end_date > sysdate";
+			
 			psmt = conn.prepareStatement(sql);
 
 			psmt.setString(1, user_id);

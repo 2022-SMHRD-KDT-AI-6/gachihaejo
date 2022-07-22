@@ -133,7 +133,7 @@
 %>
     <section class="main main-img">
     	<%if(login){%>
-    		<p class="main-txt"><%=dto.getId()%> 님 환영합니다.<br>혼자 취미생활을 즐기기 힘들때! 저희가 도와드립니다.</p>
+    		<p class="main-txt"><%=dto.getNick()%> 님 환영합니다.<br>혼자 취미생활을 즐기기 힘들때! 저희가 도와드립니다.</p>
     	<%}else{%>
         <p class="main-txt">혼자 취미생활을 즐기기 힘들때! 저희가 도와드립니다.</p>
         <%} %>
