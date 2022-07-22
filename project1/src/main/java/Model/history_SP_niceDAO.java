@@ -243,7 +243,7 @@ public class history_SP_niceDAO {
 		db_Corn();
 		try {
 
-			String sql = "select * from tbl_party where user_id = ? or party_seq in (select party_seq from tbl_party where party_seq in (select party_seq from tbl_request_party where user_id = ?)) and sysdate > party_end_date";
+			String sql = "select * from tbl_party where (user_id = ? or party_seq in (select party_seq from tbl_request_party where user_id = ?)) and sysdate > party_end_date";
 
 			psmt = conn.prepareStatement(sql);
 
