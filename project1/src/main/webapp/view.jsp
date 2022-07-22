@@ -309,13 +309,15 @@
                     <div class="hobby-item">
                     
                     <% 
-                    	String[] cateList = {"sports", "game", "cooking", "music", "art", "movie", "pet", "health", "craft", "improve", "travle"};
+                    	String[] cateList = {"sports", "game", "cooking", "music", "art", "movie", "pet", "health", "craft", "improve", "travel"};
                     	String[] imgName = new String[list.size()];
-                    	
                     	for(int j = 0; j < list.size(); j++){
-                    	
+                    		if(list.get(j).getParty_type().equals("travel")){
+                    		}
                     		for(int k = 0; k < cateList.length; k++){
                     			if(list.get(j).getParty_type().equals( cateList[k]) ){
+                    				if(list.get(j).getParty_type().equals("travel")){
+                    				}
                         			imgName[j] =  cateList[k] + ".png";
                         			break;
                         		}                    			
@@ -376,7 +378,7 @@
                     <div class="hobby-item">
                     
                     <% 
-                    	String[] cateList = {"sports", "game", "cooking", "music", "art", "movie", "pet", "craft", "improve", "travle"};
+                    	String[] cateList = {"sports", "game", "cooking", "music", "art", "movie", "pet", "craft", "improve", "travel"};
                     	String[] imgName = new String[list.size()];
                     	
                     	for(int j = 0; j < list.size(); j++){

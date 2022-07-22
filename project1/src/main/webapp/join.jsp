@@ -458,10 +458,10 @@ a {text-decoration: none;}
 			
 			success : function (result) {
 				if(result == 0){
-					$("#checkId").html('사용할 수 없는 닉네임입니다.');
+					$("#checkId").html('사용할 수 없는 아이디입니다.');
 					$("#checkId").attr('color', 'red');
 				}else{
-					$("#checkId").html('사용할 수 있는 닉네임입니다.');
+					$("#checkId").html('사용할 수 있는 아이디입니다.');
 					$("#checkId").attr('color', 'green');
 				}
 			},

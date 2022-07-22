@@ -203,7 +203,7 @@
 
 										<option value="craft">공예
 										<option value="improve">자기계발
-										<option value="travle">여행
+										<option value="travel">여행
 										</select>
 									</td>
 								</tr>

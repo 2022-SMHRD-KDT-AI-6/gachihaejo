@@ -318,7 +318,7 @@ i.fas.fa-bars {
     position: relative;
     width: 100%;
     height: 600px;
-    background: url('image/Testimg/main.jpg') no-repeat center / cover;
+    background: url('image/Testimg/main.png') no-repeat center / cover;
     display: block;
     border: none;
 }
