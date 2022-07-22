@@ -1,3 +1,5 @@
+<%@page import="Model.CreatePartyDTO"%>
+<%@page import="Model.SearchPartyDTO"%>
 <%@page import="Model.LoginDTO"%>
 <%@page import="Model.history_SP_niceDTO"%>
 <%@page import="Model.history_CP_niceDTO"%>
@@ -53,6 +55,9 @@
 	String user_nick = user.getNick();
 	ArrayList<history_CP_niceDTO> list = dao.CP_select(user_id);
 	ArrayList<history_SP_niceDTO> sp_list = sp_dao.SP_select(user_id);
+	history_SP_niceDAO history_dao = new history_SP_niceDAO();
+	ArrayList<SearchPartyDTO> history_list =  history_dao.history(user_id);
+	
 %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -80,7 +85,7 @@
 					<h2 class="heading-section">
 					<button class = 'btn btn-outline-primary' id="history_CP">만든 파티</button>
 					<button class = 'btn btn-outline-primary' id="history_SP">신청한 파티</button>
-					<button class = 'btn btn-outline-primary' onclick = "location.href = '../Party_history.jsp'">이전 파티 기록</button></h2>
+					<button class = 'btn btn-outline-primary' id = "history_HS">이전 파티 기록</button></h2>
 				</div>
 			</div>
 			
@@ -150,13 +155,13 @@
 				<% for(int i = 0; i < sp_list.size(); i++){%>
 					<% 
 					int party_seq = sp_list.get(i).getParty_seq();
-					String title = sp_dao.title_select(party_seq);
+					CreatePartyDTO dto = sp_dao.party_select(party_seq);
 					%>
 					base += "<tr>";
-					base += "<th scope='row'><a href = 'HistoryParty_cp_list?party_seq=<%=list.get(i).getParty_seq()%>'> <%= list.get(i).getParty_title() %> </a></th>";
-					base += "<td> <%= list.get(i).getParty_addr() %> </td>";
-					base += "<td> <%= list.get(i).getParty_max_cnt() %> </td>";
-					base += "<td> <%= list.get(i).getParty_end_date() %> </td>";
+					base += "<th scope='row'> <%= dto.getTitle() %></th>";
+					base += "<td> <%= dto.getAddr()%> </td>";
+					base += "<td> <%= dto.getMax_cnt()%> </td>";
+					base += "<td> <%= dto.getEnd_Date()%> </td>";
 					base += "<td><button class = 'btn btn-outline-primary' id = 'party_cancel_<%=i%>'>취 소</button></td>";
 					base += "</tr>";
 						
@@ -170,6 +175,43 @@
 				$("#box").append(base);
 			})
 				
+			$("#history_HS").on("click", function() { //이전 파티 기록 클릭시 생성
+					var base = "";
+					
+					$("#box").empty();
+					base += "<div class='row'>";
+					base += "<div class='col-md-12'>";
+					base += "<div class='table-wrap'>";
+					base += "<table class='table table-striped'>";
+					base += "<thead>";
+					base += "<tr>"; 
+					base += "<th>번호</th>";		      
+					base += "<th>제목</th>";
+					base += "<th>방장</th>";
+					base += "<th>모집마감날짜</th>";
+					base += "</tr>";
+					base += "</thead>";
+					base += "<tbody>";
+					
+					<% for(int i = 0; i < history_list.size(); i++){%>
+						base += "<tr>";
+						base += "<th scope='row'><%= history_list.get(i).getParty_seq() %></th>";
+						base += "<td><%= history_list.get(i).getParty_title() %></td>";
+						base += "<td><%= history_list.get(i).getUser_id()%></td>";
+						base += "<td><%= history_list.get(i).getParty_end_date() %></td>";
+						base += "</tr>";
+					<%}%>
+					
+					base += "</tbody>"; 
+					base += "</table>";
+					base += "</div>";
+					base += "</div>";
+					base += "</div>";
+					$("#box").append(base);
+				})
+			
+			
+			
 		}) //펑션 끝
 		<% for(int i = 0; i < list.size(); i++) {%>
 		$(document).on('click', '#delete_<%=i%>',function(){

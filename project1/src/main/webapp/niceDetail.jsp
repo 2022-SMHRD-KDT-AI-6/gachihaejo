@@ -75,7 +75,7 @@ String user_nick = user.getNick();
 							  <thead>
 							    <tr>
 							      <th>파티번호</th>
-							      <th>유저 닉네임</th>
+							      <th>유저 아이디</th>
 							      <th>참가 신청일</th>
 							      <th>상태</th>
 							      <th></th>

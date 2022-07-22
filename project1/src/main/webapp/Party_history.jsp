@@ -86,8 +86,7 @@ ArrayList<SearchPartyDTO> history_list =  dao.history(user_id);
 							    </tr>
 							  </thead>
 							  <tbody>
-							  <%for(int i = 0; i < history_list.size(); i++){
-							  	System.out.println(i);%>
+							  <%for(int i = 0; i < history_list.size(); i++){%>
 							    <tr>
 							      <th scope="row"><%= history_list.get(i).getParty_seq() %></th>
 							      <td><%= history_list.get(i).getParty_title() %></td>

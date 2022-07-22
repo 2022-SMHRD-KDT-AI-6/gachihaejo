@@ -52,7 +52,7 @@ public class history_SP_niceDAO {
 		db_Corn();
 		try {
 
-			String sql = "select * from tbl_request_party where user_id = ? and party_end_date > sysdate";
+			String sql = "select * from tbl_request_party where user_id = ?";
 			
 			psmt = conn.prepareStatement(sql);
 
@@ -80,8 +80,10 @@ public class history_SP_niceDAO {
 
 	}
 
-	public String title_select(int party_seq) {
+	public CreatePartyDTO party_select(int party_seq) {
 
+		CreatePartyDTO dto = new CreatePartyDTO();
+		
 		String result = "";
 		db_Corn();
 		try {
@@ -96,14 +98,24 @@ public class history_SP_niceDAO {
 
 			while (rs.next()) {
 
-				result = rs.getString("party_title");
+				String title = rs.getString("party_title");
+				String type = rs.getString("party_type");
+				String content = rs.getString("party_content");
+				String addr = rs.getString("party_addr");
+				int max_cnt = rs.getInt("party_max_cnt");
+				String end_Date = rs.getString("party_end_Date");
+				String user_id = rs.getString("user_id");
+				double party_latitude = rs.getDouble("party_latitude");
+				double party_longitude = rs.getDouble("party_longitude");
+				
+				dto = new CreatePartyDTO(title, type, content, addr, max_cnt, end_Date, user_id, party_latitude, party_longitude);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			db_close();
 		}
-		return result;
+		return dto;
 
 	}
 
