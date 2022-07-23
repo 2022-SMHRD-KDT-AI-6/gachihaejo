@@ -248,7 +248,6 @@ input{
                                     <h6>
                                         <%= dto.getNick() %>
                                     </h6>
-                                    <p class="proile-rating">선호도 : <span>8/10</span></p>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">프로필</a>
