@@ -2,6 +2,9 @@ select * from tbl_user;
 
 select * from TBL_PARTY
 
+select * from TBL_REQUEST_PARTY 
+select count(*) from TBL_REQUEST_PARTY where party_seq = ?
+
 select * from tbl_user where user_id = 'ㅗㅗ' and user_pw = 0000
 
 select * from tbl_user;

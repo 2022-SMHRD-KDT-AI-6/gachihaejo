@@ -53,7 +53,7 @@ public class history_SP_niceDAO {
 		try {
 
 			String sql = "select * from tbl_request_party where user_id = ?";
-			
+
 			psmt = conn.prepareStatement(sql);
 
 			psmt.setString(1, user_id);
@@ -83,7 +83,7 @@ public class history_SP_niceDAO {
 	public CreatePartyDTO party_select(int party_seq) {
 
 		CreatePartyDTO dto = new CreatePartyDTO();
-		
+
 		String result = "";
 		db_Corn();
 		try {
@@ -107,8 +107,9 @@ public class history_SP_niceDAO {
 				String user_id = rs.getString("user_id");
 				double party_latitude = rs.getDouble("party_latitude");
 				double party_longitude = rs.getDouble("party_longitude");
-				
-				dto = new CreatePartyDTO(title, type, content, addr, max_cnt, end_Date, user_id, party_latitude, party_longitude);
+
+				dto = new CreatePartyDTO(title, type, content, addr, max_cnt, end_Date, user_id, party_latitude,
+						party_longitude);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -171,7 +172,6 @@ public class history_SP_niceDAO {
 
 			row = psmt.executeUpdate();
 
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -180,7 +180,7 @@ public class history_SP_niceDAO {
 		return row;
 
 	}
-	
+
 	public int update_refuse(int party_seq, String user_id) { // 내가 만든 파티 요청 거절
 
 		int row = 0;
@@ -198,7 +198,6 @@ public class history_SP_niceDAO {
 
 			row = psmt.executeUpdate();
 
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -207,26 +206,26 @@ public class history_SP_niceDAO {
 		return row;
 
 	}
-	
+
 	public ArrayList<history_CP_niceDTO> history_select(String user_id) { // 내 이전 파티기록 조회
-		
+
 		// 내가 개설한 파티, 내가 참석한 파티
-		
-		ArrayList<history_CP_niceDTO>  list = new ArrayList<>();
+
+		ArrayList<history_CP_niceDTO> list = new ArrayList<>();
 		db_Corn();
 		try {
-			
+
 			String sql = "select * from tbl_party where user_id = ?";
-			
+
 			psmt = conn.prepareStatement(sql);
-			
+
 			psmt.setString(1, user_id);
-			
+
 			rs = psmt.executeQuery();
-			
+
 			while (rs.next()) {
 				history_CP_niceDTO dto = new history_CP_niceDTO();
-				
+
 				dto.setParty_seq(rs.getInt("party_seq"));
 				dto.setParty_title(rs.getString("party_title"));
 				dto.setParty_type(rs.getString("party_type"));
@@ -240,16 +239,16 @@ public class history_SP_niceDAO {
 				dto.setParty_longitude(rs.getDouble("party_longitude"));
 				list.add(dto);
 			}
-			
+
 		} catch (Exception e) {
-		e.printStackTrace();
+			e.printStackTrace();
 		} finally {
 			db_close();
 		}
 		return list;
-		
+
 	}
-	
+
 	public ArrayList<SearchPartyDTO> history(String user_id) { // 내가 만든 파티, 내가 참석했던 파티들의 마감날짜 지난 파티 정보
 		ArrayList<SearchPartyDTO> list = new ArrayList<>();
 		db_Corn();
@@ -288,6 +287,66 @@ public class history_SP_niceDAO {
 		return list;
 
 	}
+
+	public history_CP_niceDTO re_cp_select(int party_seq) { // 내가 신청한 파티의 시퀀스 번호를 통해 해당 파티의 정보를 불러올 수 있다.
+		history_CP_niceDTO dto = new history_CP_niceDTO();
+		db_Corn();
+		try {
+
+			String sql = "select * from tbl_party where party_seq = ?";
+
+			psmt = conn.prepareStatement(sql);
+
+			psmt.setInt(1, party_seq);
+
+			rs = psmt.executeQuery();
+
+			while (rs.next()) {
+
+				dto.setParty_seq(rs.getInt("party_seq"));
+				dto.setParty_title(rs.getString("party_title"));
+				dto.setParty_type(rs.getString("party_type")); 
+				dto.setParty_content(rs.getString("party_content"));
+				dto.setParty_content(rs.getString("party_addr"));
+				dto.setParty_max_cnt(rs.getInt("Party_max_cnt"));
+				dto.setParty_end_date(rs.getString("reg_date"));
+				dto.setUser_id(rs.getString("user_id"));
+				dto.setParty_latitude(rs.getDouble("party_latitude"));
+				dto.setParty_longitude(rs.getDouble("Party_longitude"));
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			db_close();
+		}
+		return dto;
+
+	}
 	
-	
+	public int count_party_seq(int party_seq) { // 파티 번호를 매개변수로 tbl_request_party의 같은 파티번호의 카운트를 구한다.
+		int count = 0;
+		db_Corn();
+		try {
+
+			String sql = "select * from tbl_request_party where party_seq = ? and attendance_YN = 'Y'";
+
+			psmt = conn.prepareStatement(sql);
+
+			psmt.setInt(1, party_seq);
+
+			rs = psmt.executeQuery();
+
+			while (rs.next()) {
+
+				count++;
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			db_close();
+		}
+		return count;
+	}
 }

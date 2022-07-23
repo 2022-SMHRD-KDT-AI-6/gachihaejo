@@ -1,3 +1,5 @@
+<%@page import="Model.history_CP_niceDTO"%>
+<%@page import="Model.history_SP_niceDAO"%>
 <%@page import="Model.LoginDTO"%>
 <%@page import="Model.history_SP_niceDTO"%>
 <%@page import="java.util.ArrayList"%>
@@ -48,6 +50,8 @@ ArrayList<history_SP_niceDTO> list = (ArrayList<history_SP_niceDTO>)request.getA
 LoginDTO user = (LoginDTO)session.getAttribute("user");
 String user_id = user.getId();
 String user_nick = user.getNick();
+history_SP_niceDAO dao = new history_SP_niceDAO();
+
 %>
 <header id="header">
             <div class="h_cont">
@@ -75,14 +79,17 @@ String user_nick = user.getNick();
 							  <thead>
 							    <tr>
 							      <th>파티번호</th>
+							      <th>파티제목</th>
 							      <th>유저 아이디</th>
 							      <th>참가 신청일</th>
+							      <th>모집마감일</th>
 							      <th>상태</th>
 							      <th></th>
 							    </tr>
 							  </thead>
 							  <tbody>
 							  <%for(int i = 0; i < list.size(); i++){
+								  history_CP_niceDTO list2 = dao.re_cp_select(list.get(i).getParty_seq()); // 신청한 파티에서 뽑아온 파티시퀀스를 통해 파티시퀀스에 맞는 파티들의 정보를 가지고 오는 DAO
 								  String YN = "";
 							  if(list.get(i).getAttendance_yn().equals("Y")){
 							  	 YN = "수락";
@@ -91,8 +98,10 @@ String user_nick = user.getNick();
 							  }else{YN = "대기";}%>
 							    <tr>
 							      <th scope="row"><%= list.get(i).getParty_seq() %></th>
+							      <td><%= list2.getParty_title() %></td>
 							      <td><%= list.get(i).getUser_id() %></td>
 							      <td><%= list.get(i).getReg_date() %></td>
+							      <td><%= list2.getParty_end_date() %></td>
 							      <td><%= YN %></td>
 							      <td>
 								  	<button class = 'btn btn-info' id = "ok<%=i%>">수 락</button>	

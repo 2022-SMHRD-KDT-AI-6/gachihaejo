@@ -58,6 +58,7 @@
 	history_SP_niceDAO history_dao = new history_SP_niceDAO();
 	ArrayList<SearchPartyDTO> history_list =  history_dao.history(user_id);
 	
+	
 %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -85,7 +86,7 @@
 					<h2 class="heading-section">
 					<button class = 'btn btn-outline-primary' id="history_CP">만든 파티</button>
 					<button class = 'btn btn-outline-primary' id="history_SP">신청한 파티</button>
-					<button class = 'btn btn-outline-primary' id = "history_HS">이전 파티 기록</button></h2>
+					<button class = 'btn btn-outline-primary' id ="history_HS">이전 파티 기록</button></h2>
 				</div>
 			</div>
 			
@@ -105,20 +106,26 @@
 					base += "<table class='table table-striped' id = 'CP_party'>";
 					base += "<thead>";
 					base += "<tr>"; 
+					base += "<th>번호</th>";		      
 					base += "<th>제목</th>";		      
 					base += "<th>주소</th>";
-					base += "<th>마감인원</th>";
-					base += "<th>날짜</th>";
+					base += "<th>인원</th>";
+					base += "<th>파티 개설 날짜</th>";
+					base += "<th>만나는 날짜</th>";
 					base += "<th></th>";
 					base += "</tr>";
 					base += "</thead>";
 					base += "<tbody>";
 					
-					<% for(int i = 0; i < list.size(); i++){%>
+					<% for(int i = 0; i < list.size(); i++){
+					int count = history_dao.count_party_seq(list.get(i).getParty_seq());%>
+					
 						base += "<tr>";
+						base += "<td> <%= list.get(i).getParty_seq() %> </td>";
 						base += "<th scope='row'> <a href = '../HistoryParty_cp_list?party_seq=<%=list.get(i).getParty_seq()%>'> <%= list.get(i).getParty_title()%> </a></th>";
 						base += "<td> <%= list.get(i).getParty_addr() %> </td>";
-						base += "<td> <%= list.get(i).getParty_max_cnt() %> </td>";
+						base += "<td> <%=count%> / <%= list.get(i).getParty_max_cnt() %> </td>";
+						base += "<td> <%= list.get(i).getReg_date() %> </td>";
 						base += "<td> <%= list.get(i).getParty_end_date() %> </td>";
 						base += "<td><button class = 'btn btn-outline-primary' id = 'delete_<%=i%>'>취 소</button></td>";
 						base += "</tr>";
@@ -143,25 +150,36 @@
 				base += "<table class='table table-striped' id = 'CP_party'>";
 				base += "<thead>";
 				base += "<tr>"; 
+				base += "<th>번호</th>";		      
 				base += "<th>제목</th>";		      
 				base += "<th>주소</th>";
-				base += "<th>마감인원</th>";
-				base += "<th>신청일자</th>";
+				base += "<th>인원</th>";
+				base += "<th>신청날짜</th>";
+				base += "<th>만나는 날짜</th>";
+				base += "<th>상태</th>";
 				base += "<th></th>";
 				base += "</tr>";
 				base += "</thead>";
 				base += "<tbody>";
 				
-				<% for(int i = 0; i < sp_list.size(); i++){%>
-					<% 
+				<% for(int i = 0; i < sp_list.size(); i++){
 					int party_seq = sp_list.get(i).getParty_seq();
 					CreatePartyDTO dto = sp_dao.party_select(party_seq);
-					%>
+					String YN = "";
+					  if(sp_list.get(i).getAttendance_yn().equals("Y")){
+					  	 YN = "수락";
+					  }else if(sp_list.get(i).getAttendance_yn().equals("N")){
+					  	 YN = "거절";
+					  }else{YN = "대기";}%>
+					
 					base += "<tr>";
-					base += "<th scope='row'> <%= dto.getTitle() %></th>";
+					base += "<th scope='row'> <%= sp_list.get(i).getParty_seq() %></th>";
+					base += "<td> <%= dto.getTitle() %></td>";
 					base += "<td> <%= dto.getAddr()%> </td>";
 					base += "<td> <%= dto.getMax_cnt()%> </td>";
+					base += "<td> <%= sp_list.get(i).getReg_date()%> </td>";
 					base += "<td> <%= dto.getEnd_Date()%> </td>";
+					base += "<td> <%= YN%> </td>";
 					base += "<td><button class = 'btn btn-outline-primary' id = 'party_cancel_<%=i%>'>취 소</button></td>";
 					base += "</tr>";
 						
@@ -187,6 +205,7 @@
 					base += "<tr>"; 
 					base += "<th>번호</th>";		      
 					base += "<th>제목</th>";
+					base += "<th>주소</th>";
 					base += "<th>방장</th>";
 					base += "<th>모집마감날짜</th>";
 					base += "</tr>";
@@ -197,6 +216,7 @@
 						base += "<tr>";
 						base += "<th scope='row'><%= history_list.get(i).getParty_seq() %></th>";
 						base += "<td><%= history_list.get(i).getParty_title() %></td>";
+						base += "<td><%= history_list.get(i).getParty_addr()%></td>";
 						base += "<td><%= history_list.get(i).getUser_id()%></td>";
 						base += "<td><%= history_list.get(i).getParty_end_date() %></td>";
 						base += "</tr>";
